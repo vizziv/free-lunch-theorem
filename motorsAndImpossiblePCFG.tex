@@ -1,0 +1,96 @@
+\documentclass[11pt]{amsart}
+\pdfoutput=1
+\usepackage{amsmath, amssymb, amsthm, graphicx, subfig, mathrsfs, calc, xspace,
+  mathtools, ifthen, booktabs, longtable, comment, setspace, verbatim,
+  placeins}
+\usepackage[colorlinks=true]{hyperref}
+\hypersetup{urlcolor=blue, citecolor=red}
+\newlength{\figWidthA}
+\newlength{\figWidthB}
+
+% General
+\newcommand{\xth}[1][th]{\textsuperscript{#1}\xspace}
+\newcommand{\set}[2]{\ifthenelse{\equal{#2}{}}{\{#1\}}{\{#1 \mid #2\}}}
+\newcommand{\ol}{\overline}
+\newcommand{\s}{\sigma}
+\newcommand{\nats}{\mathbb{N}}
+\newcommand{\ints}{\mathbb{Z}}
+\newcommand{\G}{\mathscr{G}}
+\newcommand{\V}[1][G]{V(#1)}
+\newcommand{\E}[1][G]{E(#1)}
+\newcommand{\N}[2][]{\ifthenelse{\equal{#1}{}}{N(#2)}{N_{#1}(#2)}}
+\renewcommand{\deg}[2][]{\ifthenelse{\equal{#1}{}}{d(#2)}{d_{#1}(#2)}}
+\newcommand{\size}[1]{\##1}
+
+\newcommand{\gamename}[1]{\ifthenelse{\equal{\showinggamename}{false}}%
+  {}{^{#1}}}
+\newcommand{\showgame}{\def\showinggamename{true}}
+\newcommand{\hidegame}{\def\showinggamename{false}}
+\newcommand{\showhere}[1]{\showgame#1\hidegame}
+\hidegame
+
+% Parallel chip-firing
+\newcommand{\pos}[2][\s]{#1_{#2}}
+\newcommand{\chips}[3][\s]{#1_{#3}(#2)}
+\newcommand{\receiving}[3][\s]{\Phi\gamename{#1}_{#3}(#2)}
+\newcommand{\firing}[3][\s]{F\gamename{#1}_{#3}(#2)}
+\newcommand{\pfp}[2][\s]{F\gamename{#1}(#2)}
+\newcommand{\pat}[3][\s]{R\gamename{#1}_{#3}(#2)}
+\newcommand{\period}[1][\s]{T(#1)}
+\newcommand{\pfpverts}[2][\s]{\tau(#2)}
+\newcommand{\pfpedges}[3][\s]{\pi(#2,#3)}
+\newcommand{\misb}[4][\s]{m_{#2}(#3,#4)}
+\newcommand{\sctr}[1]{\mathcal{X}(#1)}
+\newcommand{\mots}[1][\s]{M(#1)}
+\newcommand{\pfps}[1][\s]{P(#1)}
+\newcommand{\cpfps}[1][\s]{Q(#1)}
+
+% Theorem
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{conj}[thm]{Conjecture}
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\setlength\figWidthA{.72\textwidth}
+\setlength\figWidthB{.28\textwidth}
+
+\title[Motors and Impossible Firing Patterns in the PCFG]{Motors and Impossible
+  Firing Patterns in the\\Parallel Chip-Firing Game}
+\author{Tian-Yi Jiang, Ziv Scully, Yan X. Zhang}
+\address{Massachusetts Institute of Technology}
+\email{ziv@mit.edu}
+\begin{abstract}
+\input{abstract}
+\end{abstract}
+\maketitle
+
+\input{intro}
+
+\input{defsAndBasics}
+
+\input{motorsOnTrees}
+
+\input{simulatingMotors}
+
+\input{nonclumpiness}
+
+\input{corollaries}
+
+\input{discussion}
+
+%\input{bellmanFord}
+
+\section*{Acknowledgements}
+Ziv Scully thanks Yan X. Zhang of MIT for his guidance, advice, and mentorship;
+Tian-Yi Jiang of MIT for his collaboration; and MIT PRIMES for supporting the
+research. Yan X. Zhang was supported by an NSF Graduate Fellowship. We thank
+Tiankai Liu for improving upon a previous proof of Theorem~\ref{morale}. We
+would also like to thank Dr.~Anne Fey, Dr.~Lionel Levine and Dr.~Tanya
+Khovanova for helpful discussions.
+
+\bibliographystyle{amsmodded}
+\bibliography{refs}
+\end{document}

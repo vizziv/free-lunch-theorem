@@ -1,0 +1,85 @@
+\section{Implications of Nonclumpiness} \label{corollaries}
+It is a basic property of the parallel chip-firing game that every vertex fires
+the same number of times each period~\cite{jiang}. This means, roughly
+speaking, that every periodic game is either ``mostly waiting'' with bursts of
+firing or ``mostly firing'' with bursts of waiting. (In fact, there is a
+bijection between them. Each periodic game has a complement that inverts firing
+and waiting~\cite{jiang}.) This is because if a vertex waits twice in a row,
+then because it therefore never fires twice in a row, it fires less than half
+the time over the course of a period. Similarly, a vertex that fires twice in a
+row fires more than half the time. We cannot have a vertex that waits twice
+in a row and a vertex that fires twice in a row in the same periodic game
+because each vertex fires the same number of times each period.
+
+\begin{cor}
+Once a parallel chip-firing game reaches a periodic position, either no vertex
+fires twice in a row or no vertex waits twice in a row.
+\end{cor}
+
+Let the \emph{interior} of a set of vertices $W$ be $I(W) = \set{v \in W}{N(v)
+  \subseteq W}$. Because a waiting (or firing) vertex with only waiting (or
+firing) neighbors will wait (or fire) the following turn as well, the above
+observation proves the following conjecture of Fey and
+Levine~\cite{privateComms}.
+
+\begin{cor}\label{feyLevine}
+Let $\sigma$ be a periodic game on $G$,
+\begin{align*}
+  A &= \set{v \in \V}{\firing{v}{a} = 0} \\
+  B &= \set{v \in \V}{\firing{v}{b} = 1},
+\end{align*}
+where $a,b \in \nats$. Then either $I(A)$ or $I(B)$ is empty.
+\end{cor}
+
+Interestingly, Corollary~\ref{feyLevine} implies Theorem~\ref{nct}. If clumpy
+PFPs were possible, then a leaf attached to a motor with a clumpy PFP would be
+in $I(A)$ and $I(B)$ for appropriately chosen $a,b \in \nats$.
+
+In one of the first papers on the parallel chip-firing game, Bitar and Goles
+characterized parallel chip-firing games on trees in~\cite{bitarGoles}.
+Corollary~\ref{freeLunch} and Theorem~\ref{nct} allow us to characterize the
+behavior on tree-like subgraphs---subgraphs such that, if an edge to a root
+vertex is cut, become a tree separated from the rest of the graph---by making
+the root vertex a motor.
+
+\begin{cor}
+Let $\s$ be a periodic game on $G$ with $\period \geq 3$ in which no vertex
+fires twice in a row, $H$ be a tree-like subgraph of $G$ and $m \in \V[H]$ be
+the root of $H$. Then for all $v \in \V[H]$,
+\[
+  \chips{v}{t} = \begin{cases}
+    \deg{v} & \textnormal{if } \firing{m}{t-D} = 1 \\
+    0 & \textnormal{if } \firing{m}{t-D-1} = 1 \\
+    \deg{v} - 1 & \textnormal{otherwise},
+  \end{cases}
+\]
+where $D$ is the distance from $m$ to $v$. An analogous result holds if no
+vertex waits twice in a row.
+\end{cor}
+
+In some sense, tree-like subgraphs are passive in that their vertices fire only
+in response to their root-side neighbor firing. In a periodic game, we can
+completely remove tree-like subgraphs without affecting the PFPs of the other
+vertices.
+
+\begin{cor}
+Let $\s$ be a periodic game on $G$ and $l \in \V$ be a leaf with $\N{l} =
+\{m\}$. Suppose that no vertex fires twice in a row. Let $G'$ be the subgraph
+of $G$ induced by $\V \setminus \{l\}$. Define $\s'$ on $G'$ such that
+$\chips[\s']{v}{0} = \chips{v}{0}$ for all $v \in \V \setminus \{m\}$ and
+\[
+  \chips[\s']{m}{0} = \begin{cases}
+    \chips{m}{0} &\textnormal{if }\showhere{\firing{l}{0}} = 1 \\
+    \chips{m}{0} - 1 &\textnormal{otherwise}.
+  \end{cases}
+\]
+An analogous result holds if no vertex waits twice in a row.
+\end{cor}
+
+Compared to $\s'$, $m$ has to have an extra chip to fire in $\s$. However,
+unless $m$ fired the previous turn---which, because $l$ is a leaf, is
+equivalent to saying $l$ is firing this turn---$m$ will have received the extra
+chip back from $l$, so removing both $l$ and the chip has no effect on $m$ as
+long as $m$ does not fire while $l$ has a chip. This corollary concerns a leaf,
+though the result generalizes to all tree-like subgraphs by repeated
+application, providing an alternate proof of Corollary~\ref{freeLunch}.

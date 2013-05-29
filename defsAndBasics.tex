@@ -1,0 +1,127 @@
+\section{Preliminaries} \label{pres}
+
+\subsection*{Definitions}
+A \emph{parallel chip-firing game} $\s$ on a graph $G = (\V, \E)$ is a sequence
+$(\pos{t})_{t \in \nats}$ of ordered tuples with natural number elements
+indexed by $\V$. Each tuple represents the chip configuration at a particular
+turn, where each element of the tuple is the number of chips on the
+corresponding vertex. We define the following for all $v \in \V$:
+\begin{align*}
+  \N{v} &= \set{w \in \V}{\{v,w\} \in \E} \\
+  \deg{v} &= \size{\N{v}} \\
+  \chips{v}{t} &= \text{number of chips on $v$ in position $\pos{t}$} \\
+  \firing{v}{t} &= \begin{cases}
+    0 &\text{ if } \chips{v}{t} \leq \deg[]{v} - 1 \\
+    1 &\text{ if } \chips{v}{t} \geq \deg[]{v}
+  \end{cases} \\
+  \receiving{v}{t} &= \sum_{\mathclap{w \in \N{v}}} \firing{w}{t}.
+\end{align*}
+In a parallel chip-firing game, $\pos{t}$ induces $\pos{t+1}$. For all $v \in
+\V$,
+\begin{equation}\label{gameDef}
+  \chips{v}{t+1} = \chips{v}{t} + \receiving{v}{t} - \firing{v}{t}\deg[]{v},
+\end{equation}
+so an initial position suffices to define a game on a given graph. When
+$\firing{v}{t} = 0$, we say $v$ \emph{waits} at $t$, and when $\firing{v}{t} =
+1$, we say $v$ \emph{fires} at $t$.
+
+A position $\pos{t}$ is \emph{periodic} iff there exists $p \in \nats$ such
+that $\pos{t} = \pos{t+p}$. The minimum such $p$ for which this occurs is the
+\emph{period} of $\s$ and is denoted $\period$. Abusing notation slightly, ``a
+period'' of a game $\s$ may also refer to a set of times $\{t, t+1, \dots,
+t+\period-1\}$, where $\pos{t}$ is periodic. The parallel chip-firing game is
+deterministic and there are finitely many possible positions on a given graph
+with a given number of chips, so for any game $\s$, there exists $t_0 \in
+\nats$ such that $\pos{t}$ is periodic for all $t \geq t_0$. If the initial
+position of a game is periodic, we may also call the game itself periodic.
+
+\subsection*{Notation}
+\newlength{\tablespace}
+\setlength{\tablespace}{.3\baselineskip}
+Definitions for invented notation are given in the section indicated in the
+last column.
+
+\showgame
+\begin{centering}
+  \begin{longtable}{l p{.65\textwidth} l}
+    \toprule
+    \multicolumn{2}{l}{\emph{Parallel Chip-Firing}} & \emph{Defined in} \\
+    \midrule
+
+    $\chips{v}{t}$ & Number of chips on vertex $v$ in position $\pos{t}$. &
+    Section~\ref{pres} \vspace{\tablespace}\\
+
+    $\pfp{v}$ & Periodic firing pattern of $v$. & Section~\ref{nonclumpiness}
+    \vspace{\tablespace}\\
+
+    $\firing{v}{t}$ & Indicates whether or not vertex $v$ fires in $\pos{t}$. &
+    Section~\ref{pres} \vspace{\tablespace}\\
+
+    $\receiving{v}{t}$ & Number of chips vertex $v$ will receive in $\pos{t}$.
+    & Section~\ref{pres} \vspace{\tablespace}\\
+
+    $\pat{v}{f}$ & Set of times for which a vertex $v$ waits (if $f = 0$) or
+    fires (if $f = 1$) in $\s$. & Section~\ref{motors} \vspace{\tablespace}\\
+
+    $\period$ & Period of $\s$. & Section~\ref{pres} \vspace{\tablespace}\\
+
+    $\mots$ & Set of vertices that are motors in $\s$. & Section~\ref{motors}
+    \vspace{\tablespace}\\
+
+    $\pfps$ & Set of periodic firing patterns in $\s$. &
+    Section~\ref{nonclumpiness} \vspace{\tablespace}\\
+
+    $\cpfps$ & Set of clumpy periodic firing patterns in $\s$. &
+    Section~\ref{nonclumpiness} \vspace{\tablespace}\\
+
+    \toprule
+    \multicolumn{3}{l}{\emph{Graphs}} \\
+    \midrule
+
+    $\V$ & \multicolumn{2}{l}{Vertex set of graph $G$} \vspace{\tablespace}\\
+
+    $\E$ & \multicolumn{2}{l}{Edge set of graph $G$} \vspace{\tablespace}\\
+
+    $\N[G]{v}$ & \multicolumn{2}{l}{Neighbors of vertex $v$.}
+    \vspace{\tablespace}\\
+
+    $\deg[G]{v}$ & \multicolumn{2}{p{.815\textwidth}}{The degree of vertex $v$
+      in graph $G$.} \vspace{\tablespace}\\
+
+    \toprule
+    \multicolumn{3}{l}{\emph{Other}} \\
+    \midrule
+
+    $[a,b]$ & \multicolumn{2}{l}{The integer interval $\{a, a+1, \dots, b\}$.}
+  \end{longtable}
+\end{centering}
+\hidegame
+
+We leave out the subscript $G$ or superscript $\s$ if there is no ambiguity.
+
+% begin comment
+\begin{comment}
+\subsection*{Known Properties} \label{basics}
+Let $\s$ be a game on graph $G$. We define $\pat{v}{f} = \set{t \in
+  \nats}{\firing{v}{t} = f}$ for all $v \in \V$ and $t \in \nats$. For $f = 0$
+this is the set of times at which $v$ waits, and for $f = 1$ this is the set of
+times at which $v$ fires.
+
+\begin{lem}[{\cite[Proposition 2.5]{jiang}}] \label{sameNumTimes} 
+During a period in a game on a connected graph, every vertex fires the same
+number of times.
+\end{lem}
+
+\begin{lem}[{\cite[Lemma 1]{bitarGoles}}] \label{bitarGoles}
+Let $\s$ be a game on $G$. For all $v \in \V$ and $f = 0 \text{ or } 1$, if
+$[a, b] \in \pat{v}{f}$, then there exists $w \in \N{v}$ such that $[a-1, b-1]
+\in \pat{w}{f}$.
+\end{lem}
+
+\begin{lem}[{\cite[Lemma 2.3]{jiang}}] \label{complement}
+Let $\s$ and $\ol\s$ be games on $G$. If $\chips[\ol\s]{v}{0} = 2\deg[]{v} - 1
+- \chips{v}{0}$ for all $v \in \V$, then $\chips[\ol\s]{v}{t} = 2\deg[]{v} - 1
+- \chips{v}{t}$ for all $v \in \V$ and $t \in \nats$.
+\end{lem}
+\end{comment}
+% end comment

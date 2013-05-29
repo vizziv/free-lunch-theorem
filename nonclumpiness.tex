@@ -1,0 +1,257 @@
+\section{Signed Sums of Binary Sequences}\label{binSeq}
+Throughout this section, if $b \in \{0,1\}$, we may write $\ol{b} = 1-b$.
+
+We take a break from the parallel chip-firing game to consider two binary
+strings $p$ and $q$ of length $n$. We denote the $i$\xth element of $p$ as
+$p_i$. For simplicity, any integer equivalent to $i \bmod n$ may replace
+$i$. Let a \emph{$b$-sector} of $p$, where $b \in \{0,1\}$, be an integer
+interval $[x,y]$ such that
+\begin{align*}
+  p_x = p_{y-1} = p_y &= b \\
+  p_{x-1} = p_{x-2} &= \ol{b} \\
+  \forall i \in [x+1, y-3]: p_i + p_{i+1} &\neq 2\ol{b}.
+\end{align*}
+That is, the image of a 0-sector is preceded by two 1s, starts with 0, ends
+with two 0s and contains no two consecutive 1s. The same statements with 0s and
+1s swapped are true for 1-sectors.
+
+It is easy to see that almost any string can be partitioned into 0- and
+1-sectors in exactly one way, with exceptions only for always-alternating
+strings (e.g.\ 010101) that can be thought of as one 0-sector or one
+1-sector. Figure~\ref{sectorEx} has an example.
+
+\begin{figure}
+  \[
+    \underbracket[1pt]{01000100}\overbracket[1pt]{11011}\underbracket[1pt]{00}
+    \overbracket[1pt]{101011}
+  \]
+  \caption{A string's 0-sectors (marked below) and 1-sectors (marked
+    above). Roughly speaking, $b$-sectors have no two $\ol{b}$s in a row and
+    extend as far left as possible.}
+  \label{sectorEx}
+\end{figure}
+
+Let
+\begin{align*}
+  s_i(p) &= \begin{cases}
+    -1 & \text{if $i$ is in a 0-sector of $p$} \\
+    1 & \text{if $i$ is in a 1-sector of $p$}
+  \end{cases} \\
+  \delta_i(p) &= \begin{cases}
+    0 & \text{if $i$ is in a $b$-sector of $p$ and $i+1$ is in a $b$-sector of
+      $p$} \\
+    1 & \text{if $i$ is in a $b$-sector of $p$ and $i+1$ is in a
+      $\ol{b}$-sector of $p$}.
+  \end{cases}
+\end{align*}
+Our main theorem in this section concerns the sum
+\begin{equation}\label{misbsum}
+  M_S(p,q) = \sum_{i \in S}(s_i(p)(p_i - q_{i-1}) + s_i(q)(q_i - p_{i-1}) -
+  \delta_i(p) - \delta_i(q)),
+\end{equation}
+where $S \subseteq [0, n-1]$. This sum, superficially speaking, measures each
+sequence's ``disagreement'' with the other shifted back one step minus the
+number of sector switches. The rules of the parallel chip-firing game put a
+global upper bound on the total disagreement between vertices, yet the
+following theorem says that sector switches require disagreement. We show in
+Section~\ref{nonclumpiness} that this implies that firing sequences with sector
+switches are impossible once a game has become periodic.
+
+\begin{thm}\label{morale}
+$M_{[0,n-1]}(p,q) \geq 0$.
+\end{thm}
+
+\begin{proof}
+We can caculate $M_{[0,n-1]}(p,q)$ as $\sum_{i=0}^{n-1}M_{\{i\}}(p,q)$, and
+$M_{\{i\}}(p,q)$ is determined by $p_{i-1}$, $p_i$, $s_i(p)$, $s_{i+1}(p)$, and
+the same data for $q$. The motivation for using $s_{i+1}(p)$ as opposed to
+$s_{i-1}(p)$ in $\delta_i(p)$ is that a switch away from a $b$-sector can occur
+between $i$ and $i+1$ only if $p_{i-1} = p_i = b$. Let
+\[
+  \mu_i(p,q) = (p_{i-1},p_i,s_i(p),s_{i+1}(p),q_{i-1},q_i,s_i(q),s_{i+1}(q))
+\]
+and let $\G$ be a weighted digraph with
+\begin{align*}
+  \V[\G] &= \set{\mu_i(p,q)}{p,q \text{ strings}, i \in \nats} \\
+  \E[\G] &= \set{(u,v,w)}{\exists p,q,i\colon
+    u = \mu_i(p,q),
+    v = \mu_{i+1}(p,q),
+    w = M_{\{i\}}(p,q)}.
+\end{align*}
+(The third item of each edge is its weight.) Note that not every possible tuple
+is a vertex. Define the weight of a path to be the sum of the weights of its
+member edges, and call a path negative if it has negative weight. We can
+calculate the $M_{[0,n-1]}(p,q)$ as the weight of a path induced by the
+sequence of vertices $(\mu_0(p,q), \dots, \mu_{n-1}(p,q),
+\mu_0(p,q))$. Therefore, it suffices to show that $\G$ has no negative
+cycles. Running the Bellman-Ford algorithm~\cite{bellmanford} on $\G$ shows
+this to be the case. We describe $\G$ and the algorithm in a Python program in
+Figure~\ref{bfFig}.
+\end{proof}
+
+\begin{figure}[b!]
+\SMALL
+\verbatiminput{bellmanFord.py}
+\normalsize
+\caption{The Bellman-Ford algorithm run on $\G$.}
+\label{bfFig}
+\end{figure}
+\FloatBarrier
+
+\section{Nonclumpiness of Periodic Firing Patterns}\label{nonclumpiness}
+We consider parallel chip-firing game $\s$ on undirected graph $G$. The
+\emph{periodic firing pattern} (PFP) of a vertex $v \in \V$ is the binary
+string
+\[
+  \firing{v}{t_0}\dots\firing{v}{t_0 + \period - 1},
+\]
+where $t_0$ is the smallest natural number such that $\pos{t_0}$ is
+periodic. We write the PFP of $v$ as $\pfp{v}$. For simplicity, we assume here
+that $t_0 = 0$ and index PFPs modulo $\period$.
+
+Let $\pfps$ be the set of all PFPs occurring in $\s$. Call a PFP with both
+consecutive 0s and consecutive 1s \emph{clumpy}, and let $\cpfps$ be the set of
+all clumpy PFPs occurring in $\s$. (Recall that the $\period$\xth and 0\xth
+entries of a PFP are the same, so, for example, 011010 is clumpy.) It is known
+that, given any nonclumpy PFP, one can construct a parallel chip-firing game on
+a simple cycle in which every vertex has that PFP shifted by some number of
+steps~\cite{cycle}. We prove here that clumpy PFPs cannot occur in any parallel
+chip-firing game, showing that a PFP is possible iff it is nonclumpy.
+
+\begin{lem}\label{strongbg}
+For all $v \in \V$ and $a, b \in \nats$,
+\begin{equation}\label{local}
+  -\deg{v} + 1 \leq \sum_{t=a}^{b}(\receiving{v}{t-1} - \deg{v}\firing{v}{t})
+  \leq \deg{v}-1.
+\end{equation}
+\end{lem}
+
+\begin{proof}
+We express $\chips{v}{b}$ in terms of $\chips{v}{a-1}$.
+\begin{align*}
+  \chips{v}{b} &= \chips{v}{a-1} +
+  \smashoperator{\sum_{t=a-1}}^{b-1}(\receiving{v}{t} - \deg{v}\firing{v}{t})
+  \\
+  \chips{v}{b} - \deg{v}\firing{v}{b} &= \chips{v}{a-1} -
+  \deg{v}\firing{v}{a-1} + \sum_{t=a}^{b}(\receiving{v}{t-1} -
+  \deg{v}\firing{v}{t})
+\end{align*}
+Recall that $0 \leq \chips{v}{t} - \deg{v}\firing{v}{t} \leq \deg{v} - 1$ for
+all $t \in \nats$ such that $\pos{t}$ is periodic, which gives the desired
+inequality.
+\end{proof}
+
+We define
+\begin{align*}
+\pfpverts{p} &= {\set{v \in \V}{\pfp{v}=p}} \\
+\pfpedges{p}{q} &= {\set{\{v,w\} \in \E}{\pfp{v}=p, \pfp{w} = q}} \\
+\misb{S}{p}{q} &= \sum_{i \in S}(p_{i} - q_{i-1})
+\end{align*}
+for binary strings $p$ and $q$. We now prove our main result: clumpy PFPs do
+not occur in the parallel chip-firing game.
+
+\begin{thm}\label{nct}
+$\size{\pfpverts{p}} = 0$ for all $p \in \cpfps$.
+\end{thm}
+
+\begin{proof}
+Roughly, summing an inequality given by Lemma~\ref{strongbg} over all vertices
+with clumpy PFPs gives a lower bound on the same quantity, and summing an
+inequality given by the Theorem~\ref{morale} over all edges incident with a
+vertex with a clumpy PFP gives an upper bound on the same quantity. The lower
+bound is the total number of vertices with clumpy PFPs, and the upper bound is
+0.
+
+Let $a,b \in \nats$ and $v \in \V$. Grouping the sum in \eqref{local} by $v$'s
+neighbors instead of time steps yields
+\[
+  -\deg{v} + 1 \leq -\smashoperator{\sum_{w \in
+      \N{v}}}\misb{[a,b]}{\pfp{v}}{\pfp{w}} \leq \deg{v} - 1.
+\]
+Regrouping gives us
+\[
+  1 \leq \smashoperator{\sum_{w \in \N{v}}}(1 +
+  r\misb{[a,b]}{\pfp{v}}{\pfp{w}}),
+\]
+where $r = \pm1$. Let $p \in \pfps$. The above summed over $v \in \pfpverts{p}$
+is
+\[
+  \size{\pfpverts{p}} \leq \smashoperator{\sum_{\substack{v \in \pfpverts{p}
+        \\\ w \in \N{v}}}}(1 + r_v\misb{[a,b]}{p}{\pfp{w}}),
+\]
+where each $r_v = \pm1$ can depend on $v$. (Notation: ranges for outer sums are
+above ranges for inner sums.)
+
+For all $p \in \pfps$, let $\sctr{p}$ be the set of sectors of $p$. Abusing
+notation slightly, we may write $s_X(p)$ instead of $s_i(p)$ if $i \in X \in
+\sctr{p}$. Because each $X \in \sctr{p}$ is of the form $[a,b]$ for some $a,b
+\in \nats$, we can sum the above inequality over $X \in \sctr{p}$ and $p \in
+\cpfps$ to get
+\begin{equation}\label{almost}
+  \smashoperator[r]{\sum_{p \in \cpfps}}\size{\pfpverts{p}} \leq
+  \smashoperator{\sum_{\substack{
+        p \in \cpfps \\ v \in \pfpverts{p} \\
+        w \in \N{v} \\ X \in \sctr{p}
+  }}}(1 + r_{v,X}\misb{X}{p}{\pfp{w}}),
+\end{equation}
+where each $r_{v,X} = \pm1$ can depend on $v$ and $X$.
+
+Let $p \in \cpfps$ and $q \in \pfps$. If $q$ is clumpy, then
+\[
+  M_{[0,\period-1]}(p,q) =
+  \smashoperator{\sum_{X \in \sctr{p}}}(s_X(p)\misb{X}{p}{q} - 1) +
+  \smashoperator{\sum_{X \in \sctr{q}}}(s_X(q)\misb{X}{q}{p} - 1).
+\]
+The $-1$ in each sum accounts for the $-\delta_i(p)-\delta_i(q)$ term in
+\eqref{morale}, the definition of $M$. If instead $q$ is not clumpy, then
+$\sctr{q} = \{[0,\period-1]\}$, so
+\[
+  M_{[0,\period-1]}(p,q) =
+  \smashoperator{\sum_{X \in \sctr{p}}}(s_X(p)\misb{X}{p}{q} - 1) +
+  s_{[0,\period-1]}(q)\misb{[0,\period-1]}{q}{p}.
+\]
+However, $\misb{[0,\period-1]}{q}{p} = 0$ because $p$ and $q$ have the same
+length and number of 1s.
+
+Let $W = \set{v \in \V}{\pfp{v} \in \cpfps}$ be the set of vertices with clumpy
+PFPs. Choosing $r_{v,X} = -s_X(\pfp{v})$ and splitting the sum in
+\eqref{almost} between neighbors with and without clumpy PFPs yields
+\begin{align*}
+  \smashoperator[r]{\sum_{\substack{
+        p \in \cpfps \\
+        X \in \sctr{p}
+  }}}\size{\pfpverts{p}} &\leq
+  \smashoperator{\sum_{\substack{
+        p \in \cpfps \\ v \in \pfpverts{p} \\
+        w \in \N{v} \cap W \\ X \in \sctr{p}
+  }}}(1-s_X(p)\misb{X}{p}{\pfp{w}}) +
+  \smashoperator{\sum_{\substack{
+        p \in \cpfps \\ v \in \pfpverts{p} \\
+        w \in \N{v} \setminus W \\ X \in \sctr{p}
+  }}}(1-s_X(p)\misb{X}{p}{\pfp{w}}) \\
+  &=
+  \smashoperator[l]{\sum_{\substack{
+        p,q \in \cpfps \\
+        e \in \pfpedges{p}{q}
+  }}}\!\!\Bigg(\smashoperator[r]{\sum_{X \in \sctr{p}}}(1-s_X(p)\misb{X}{p}{q})
+  + \smashoperator{\sum_{X \in \sctr{q}}}(1-s_X(p)\misb{X}{q}{p})\Bigg)
+  \\ &\qquad + 
+  \smashoperator{\sum_{\substack{
+        p \in \cpfps \\ v \in \pfpverts{p} \\
+        w \in \N{v} \setminus W \\ X \in \sctr{p}
+  }}}(1-s_X(p)\misb{X}{p}{\pfp{w}}) \\
+  &= -\smashoperator{\sum_{\substack{
+        p,q \in \cpfps \\
+        e \in \pfpedges{p}{q}
+  }}}M_{[0,\period-1]}(p,q) -
+  \smashoperator{\sum_{\substack{
+        p \in \cpfps \\
+        v \in \pfpverts{p} \\ w \in \N{v} \setminus
+        W}}}M_{[0,\period-1]}(p,F(w)) \\
+  &\leq 0.
+\end{align*}
+The last line follows from Theorem~\ref{morale}, and when we sum over $p,q \in
+\cpfps$, we consider $p$ and $q$ unordered. (A sum over $\{p,q\} \subseteq
+\cpfps$ is one alternative notation.) Sets have nonnegative sizes, so
+$\size{\pfpverts{p}} = 0$ for all $p \in \cpfps$.
+\end{proof}
