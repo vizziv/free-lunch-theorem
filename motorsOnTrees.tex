@@ -43,7 +43,7 @@ We define
 \[
   \pat{v}{f} = \set{t \in \nats}{\firing{v}{t} = f}.
 \]
-Call an interval $[a, b]$ with $a < b$ a \emph{max-clump} of $v \in \V$ iff
+Call an interval $[a, b]$ with $a < b$ a \emph{max-clump} of $v \in \V$ if and only if
 $[a, b] \in \pat{v}{f}$ and $\firing{v}{a-1} = \firing{v}{b+1} = 1-f$, where $f
 \in \{0,1\}$. Given $v \in \V$, we can express $\nats$ as the union of
 max-clumps of $v$ and times during which $v$ alternates between firing and

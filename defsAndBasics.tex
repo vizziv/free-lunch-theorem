@@ -25,7 +25,7 @@ so an initial position suffices to define a game on a given graph. When
 $\firing{v}{t} = 0$, we say $v$ \emph{waits} at $t$, and when $\firing{v}{t} =
 1$, we say $v$ \emph{fires} at $t$.
 
-A position $\pos{t}$ is \emph{periodic} iff there exists $p \in \nats$ such
+A position $\pos{t}$ is \emph{periodic} if and only if there exists $p \in \nats$ such
 that $\pos{t} = \pos{t+p}$. The minimum such $p$ for which this occurs is the
 \emph{period} of $\s$ and is denoted $\period$. Abusing notation slightly, ``a
 period'' of a game $\s$ may also refer to a set of times $\{t, t+1, \dots,
