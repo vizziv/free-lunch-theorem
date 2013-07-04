@@ -1,6 +1,8 @@
+infty = float("inf")
+
 class Vertex:
     def __init__(self):
-        self.distance = float("inf")
+        self.distance = infty
     __hash__ = object.__hash__
 
 class Edge:
@@ -12,7 +14,7 @@ class Edge:
 def verts(edges):
     return set(vert for e in edges for vert in (e.tail, e.head))
 
-# Returns True if graph has a negative cycle or isn't strongly connected.
+# Returns True if graph has a negative cycle (or has unreachable vertices).
 def bellmanFord(edges):
     # For us, the start vertex is arbitrary.
     edges[0].tail.distance = 0
@@ -23,7 +25,7 @@ def bellmanFord(edges):
             if newDistance < e.head.distance:
                 e.head.distance = newDistance
     # Find triangle inequality failures, which are caused by negative cycles.
-    # Also detect disconnectedness to confirm we've searched the whole graph.
+    # Also confirms we've searched the whole graph (infty < infty == False).
     for e in edges:
         if e.tail.distance + e.weight < e.head.distance:
             return True

@@ -39,7 +39,7 @@ position of a game is periodic, we may also call the game itself periodic.
 \newlength{\tablespace}
 \setlength{\tablespace}{.3\baselineskip}
 Definitions for invented notation are given in the section indicated in the
-last column.
+last column.\\
 
 \showgame
 \begin{centering}
@@ -98,30 +98,3 @@ last column.
 \hidegame
 
 We leave out the subscript $G$ or superscript $\s$ if there is no ambiguity.
-
-% begin comment
-\begin{comment}
-\subsection*{Known Properties} \label{basics}
-Let $\s$ be a game on graph $G$. We define $\pat{v}{f} = \set{t \in
-  \nats}{\firing{v}{t} = f}$ for all $v \in \V$ and $t \in \nats$. For $f = 0$
-this is the set of times at which $v$ waits, and for $f = 1$ this is the set of
-times at which $v$ fires.
-
-\begin{lem}[{\cite[Proposition 2.5]{jiang}}] \label{sameNumTimes} 
-During a period in a game on a connected graph, every vertex fires the same
-number of times.
-\end{lem}
-
-\begin{lem}[{\cite[Lemma 1]{bitarGoles}}] \label{bitarGoles}
-Let $\s$ be a game on $G$. For all $v \in \V$ and $f = 0 \text{ or } 1$, if
-$[a, b] \in \pat{v}{f}$, then there exists $w \in \N{v}$ such that $[a-1, b-1]
-\in \pat{w}{f}$.
-\end{lem}
-
-\begin{lem}[{\cite[Lemma 2.3]{jiang}}] \label{complement}
-Let $\s$ and $\ol\s$ be games on $G$. If $\chips[\ol\s]{v}{0} = 2\deg[]{v} - 1
-- \chips{v}{0}$ for all $v \in \V$, then $\chips[\ol\s]{v}{t} = 2\deg[]{v} - 1
-- \chips{v}{t}$ for all $v \in \V$ and $t \in \nats$.
-\end{lem}
-\end{comment}
-% end comment
