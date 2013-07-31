@@ -18,8 +18,8 @@ The $\emph{firing sequence}$ of a vertex $v$ in game $\s$ is the sequence
 $(\firing{v}{t})_{t \in \nats}$. A \emph{motorized parallel chip-firing game},
 or simply ``motorized game'', on $G$ is a game $\s$ obeying \eqref{gameDef}
 with a non-empty set of \emph{motors} $\mots \subseteq \V$. Each motor follows
-a predetermined firing sequence without regard for normal chip-firing
-rules. For example, a motor may have a negative number of chips. The term
+a predetermined firing sequence, firing without regard to the rules bounding the 
+number of chips in a normal chip-firing game. For example, a motor may have a negative number of chips. The term
 ``ordinary game'' refers to a game with no motors when there is ambiguity. A
 motorized game is shown in Figure~\ref{motorizedTreeNoGlider}.
 \begin{figure}
@@ -33,11 +33,11 @@ motorized game is shown in Figure~\ref{motorizedTreeNoGlider}.
 
 If a motorized game $\s$ is eventually periodic (which is the case if every
 motor's firing sequence is eventually periodic), then just as in an ordinary
-game, every vertex fires the same number of times each period. This is because
+game, every vertex fires the same number of times each period. 
+The proof is identical to the proof of this fact for ordinary games~\cite{jiang}:
 all neighbors of the vertex that fires the most times each period must also
-fire that number of times, and therefore, by induction, so do all
-vertices. (Recall that we consider in this paper only connected graphs.) This
-is identical to the proof of this fact for ordinary games~\cite{jiang}.
+fire that maximal number of times, and by induction, so do all
+vertices. (Recall that we consider in this paper only connected graphs.) 
 
 We define
 \[
@@ -64,13 +64,13 @@ supported by at least one of its neighbors. The lemma follows from the
 pigeonhole principle and Lemma~\ref{strongbg}, which we state and prove later.
 
 \begin{thm} \label{cheapLunch}
-Let $\s$ be a periodic motorized game on tree $T$. For all $v \in \V[T]$, if
-$[a, b] \in \pat{v}{f}$, then $[a-D, b-D] \in \pat{m}{f}$ for some $m \in
+Let $\s$ be a periodic motorized game on tree $T$. For all $v \in \V[T]$ and $f \in \{0,1\}$
+, if $[a, b] \in \pat{v}{f}$, then $[a-D, b-D] \in \pat{m}{f}$ for some $m \in
 \mots$, where $D$ is the distance from $m$ to $v$.
 \end{thm}
 
 \begin{proof}
-The fact that $\s$ is periodic means we don't have to worry about negative turn
+The fact that $\s$ is periodic means we need not worry about negative turn
 indices.
 
 Let $v_0 = v$ and $[a_0, b_0] \supseteq [a, b]$ be a max-clump of $v_0$. By
@@ -86,14 +86,15 @@ which would mean
   [a-D, b-D] \subseteq [a_D, b_D] \subseteq \pat{m}{f},
 \]
 where $D$ is the maximum $i$ and $m = v_D \in \mots$. Thus, it suffices to show
-that there are finitely many $v_i$.
+that the sequence $\{v_0, v_1, \ldots\}$ eventually terminates. There are finitely 
+many vertices in the graph, so it suffices to show that the $v_i$ are all distinct. 
 
-Suppose that $v_i = v_{i-2}$. Then $[a_i, b_i] \cup [a_{i-2}, b_{i-2}]
+Since $T$ has no cycles, $v_i \neq v_j$ if $|i-j| > 2.$ Now
+suppose for contradiction that $v_i = v_{i-2}$. Then $[a_i, b_i] \cup [a_{i-2}, b_{i-2}]
 \subseteq \pat{v_i}{f}$. However, $[a_{i-2} - 2, b_{i-2} - 2] \subseteq [a_i,
   b_i]$, so $[a_{i-2} - 2, b_{i-2}] \subseteq \pat{v_i}{f}$. Therefore,
 $[a_{i-2}, b_{i-2}]$ is not a max-clump, a contradiction, so $v_i \neq v_{i-2}$
-for all $i$. Because $T$ has no cycles, the $v_i$ are distinct, so there are
-finitely many $v_i$.
+for all $i$, and all the $v_i$ are distinct, as desired.
 \end{proof}
 
 Call a firing sequence \emph{clumpy} if it contains two consecutive 0s and two
@@ -121,5 +122,5 @@ The reason we require the games in Theorem~\ref{cheapLunch} and
 Corollary~\ref{freeLunch} to be periodic is to consider arbitrarily many past
 turns. We can likely weaken this condition if we require the statements to be
 true only after sufficiently many turns, though exactly how many turns that is
-could depend on the activity (firing frequency) of the motor, the size of the
+could depend on the activity (firing frequency; see \cite{levine}) of the motor, the size of the
 tree, and the total number of chips in the initial position.
