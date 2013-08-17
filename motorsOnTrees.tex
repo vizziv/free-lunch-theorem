@@ -91,12 +91,12 @@ that the sequence $\{v_0, v_1, \ldots\}$ eventually terminates. There are
 finitely many vertices in the graph, so it suffices to show that the $v_i$ are
 all distinct.
 
-Since $T$ has no cycles, $v_i \neq v_j$ if $|i-j| > 2.$ Now suppose for
-contradiction that $v_i = v_{i-2}$. Then $[a_i, b_i] \cup [a_{i-2}, b_{i-2}]
-\subseteq \pat{v_i}{f}$. However, $[a_{i-2} - 2, b_{i-2} - 2] \subseteq [a_i,
-  b_i]$, so $[a_{i-2} - 2, b_{i-2}] \subseteq \pat{v_i}{f}$. Therefore,
-$[a_{i-2}, b_{i-2}]$ is not a max-clump, a contradiction, so $v_i \neq v_{i-2}$
-for all $i$, and all the $v_i$ are distinct, as desired.
+$T$ has no cycles, so if $v_i \neq v_{i-2}$ for all $i$, then all $v_i$ are
+distinct. Suppose for contradiction that $v_i = v_{i-2}$ for some $i$. Then
+$[a_i, b_i] \cup [a_{i-2}, b_{i-2}] \subseteq \pat{v_i}{f}$. However, $[a_{i-2}
+  - 2, b_{i-2} - 2] \subseteq [a_i, b_i]$, so $[a_{i-2} - 2, b_{i-2}] \subseteq
+\pat{v_i}{f}$. Therefore, $[a_{i-2}, b_{i-2}]$ is not a max-clump, a
+contradiction, so $v_i \neq v_{i-2}$ for all $i$.
 \end{proof}
 
 Call a firing sequence \emph{clumpy} if it contains two consecutive 0s and two
