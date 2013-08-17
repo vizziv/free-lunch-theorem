@@ -23,14 +23,16 @@ the number of chips in a normal chip-firing game. For example, a motor may have
 a negative number of chips. The term ``ordinary game'' refers to a game with no
 motors when there is ambiguity. A motorized game is shown in
 Figure~\ref{motorizedTreeNoGlider}.
-\begin{figure}
-  \centering
+
+\begin{centering}
+\begin{figure}[tbh]
   \subfloat{\includegraphics[width=\figWidthA]{Figures/motorizedTreeNoGlider}}
   \subfloat{\includegraphics[width=\figWidthB]{Figures/keyShortish}}
   \caption{A motorized parallel chip-firing game. The motor has firing sequence
     $(1,0,0,0,0,1,0,0,0,0,\dots)$.}
   \label{motorizedTreeNoGlider}
 \end{figure}
+\end{centering}
 
 If a motorized game $\s$ is eventually periodic (which is the case if every
 motor's firing sequence is eventually periodic), then just as in an ordinary
@@ -124,6 +126,6 @@ The reason we require the games in Theorem~\ref{cheapLunch} and
 Corollary~\ref{freeLunch} to be periodic is to consider arbitrarily many past
 turns. We can likely weaken this condition if we require the statements to be
 true only after sufficiently many turns, though exactly how many turns that is
-could depend on the activity (firing frequency; see \cite{levine}) of the
+could depend on the activity (firing frequency; see~\cite{levine}) of the
 motor, the size of the tree, and the total number of chips in the initial
 position.

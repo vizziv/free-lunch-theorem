@@ -1,8 +1,8 @@
 \section{Simulating Motors} \label{simulatingMotors}
 \showgame
 
-In this section, we consider multiple chip-firing games at once, so we include
-the subscripts and superscripts in, for example, $\deg[G]{v}$ and
+In this section, to refer to multiple chip-firing games unambiguously, we
+include the subscripts and superscripts in, for example, $\deg[G]{v}$ and
 $\firing{v}{t}$.
 
 We call a firing sequence $(f_t)_{t \in \nats}$ \emph{possible} if there exists
@@ -10,8 +10,9 @@ an ordinary game $\s$ on some graph $G$ such that $\firing{v}{t} = f_{t}$ for
 all $t \in \nats$. Our next theorem states that we can simulate motorized games
 with ordinary games as long as every motor's firing sequence is
 possible. Figure~\ref{natMot} demonstrates the concept.
+
+\begin{centering}
 \begin{figure}[tbh]
-  \centering
   \subfloat{\includegraphics[width=\figWidthA]{Figures/natMotor}}
   \subfloat{\includegraphics[width=\figWidthB]{Figures/keyShortish2}}
   \caption{Suppose the motor in motorized game (b) has firing sequence
@@ -21,6 +22,7 @@ possible. Figure~\ref{natMot} demonstrates the concept.
     (b).}
 \label{natMot}
 \end{figure}
+\end{centering}
 
 \begin{thm} \label{natMotors}
 Let $\s$ be a periodic motorized game on $G$. If every motor's firing sequence
@@ -48,7 +50,7 @@ maximum respectively of $\set{\chips{m}{t}}{t \in \nats}$. Let $k_m = b_m - a_m
 + 1$. Let $H$ be the union of $G$ and $k_m$ copies of each $A_m$, with $G$ and
 the copies of $A_m$ disjoint except for $m = u_m$ for each $m \in
 \mots$. (Thinking of the graphs as pointed topological spaces, each with
-base point $m$ or $u_m$, $H$ is a wedge sum.)
+basepoint $m$ or $u_m$, $H$ is a wedge sum.)
 
 It is clear by construction that $H$ contains no new edges between vertices of
 $G$ and that
@@ -110,10 +112,12 @@ for all $t \in \nats$, implying $\firing[\s']{v}{t} = \firing{v}{t}$ for all $v
 \in V(G)$.
 \end{proof}
 
-Again we may relax the condition that the game be periodic. In this case, the
+Again, we may relax the condition that the game be periodic. In this case, the
 periodicity ensures that the number of chips on each motor is bounded. This is
 easily shown to be equivalent to each motor having the same activity, so that
-is a sufficient condition for the theorem.
+is a sufficient condition for the theorem. Of course, because all ordinary
+games are eventually periodic, any motorized game in which each motor has a
+possible firing sequence will eventually be periodic.
 
 In Theorem~\ref{cheapLunch}, motors were primarily a convenient intuition and
 terminology; we could have proved a similar theorem within the context of the

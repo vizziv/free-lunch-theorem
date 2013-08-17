@@ -98,18 +98,26 @@ string
   \firing{v}{t_0}\dots\firing{v}{t_0 + \period - 1},
 \]
 where $t_0$ is the smallest natural number such that $\pos{t_0}$ is
-periodic. We write the PFP of $v$ as $\pfp{v}$. For simplicity, we assume here
-that $t_0 = 0$ and index PFPs modulo $\period$.
+periodic\footnote{The reason we introduce PFPs instead of continuing to reason
+  with firing sequences is because a PFP is aware of the period of the game it
+  occurs in. For instance, the PFPs 01 and 0101 result in the same periodic
+  firing sequence, but while latter might occur in the same game as the PFP
+  0011, the former cannot.}. We write the PFP of $v$ as $\pfp{v}$. For
+simplicity, we assume here that $t_0 = 0$ and index PFPs modulo $\period$.
 
 Let $\pfps$ be the set of all PFPs occurring in $\s$. Call a PFP with both
 consecutive 0s and consecutive 1s \emph{clumpy}, and let $\cpfps$ be the set of
 all clumpy PFPs occurring in $\s$. (Recall that the $\period$\xth and 0\xth
 entries of a PFP are the same, so, for example, 011010 is clumpy.) It is known
-that, given any nonclumpy PFP, one can construct a parallel chip-firing game on
-a simple cycle in which every vertex has that PFP shifted by some number of
+that, given almost any\footnote{The given construction requires that the PFP
+  not be decomposable to a repeated substring. Using Theorem~\ref{natMotors},
+  one can expand the construction to any nonclumpy PFP other than those that
+  are 01 or 10 repeated more than once. These PFPs turn out to be impossible,
+  though the corresponding firing sequences are possible in games of period 2.}
+nonclumpy PFP, one can construct a parallel chip-firing game on a simple cycle
+in which every vertex has that PFP shifted by some number of
 steps~\cite{cycle}. We prove here that clumpy PFPs cannot occur in any parallel
-chip-firing game, showing that a PFP is possible if and only if it is
-nonclumpy.
+chip-firing game.
 
 \begin{lem}\label{strongbg}
 For all $v \in \V$ and $a, b \in \nats$,
