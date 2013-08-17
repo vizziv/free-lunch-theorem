@@ -55,7 +55,8 @@ other shifted back one step minus the number of sector switches. The rules of
 the parallel chip-firing game put a global upper bound on the total
 disagreement between vertices, yet the following theorem says that sector
 switches require disagreement. We show in Section~\ref{nonclumpiness} that this
-implies that firing patterns with sector switches are impossible.
+implies that firing sequences with sector switches are impossible once a game
+has become periodic.
 
 \begin{thm}\label{morale}
 $M_{[0,n-1]}(p,q) \geq 0$.
@@ -90,25 +91,24 @@ Appendix~\ref{bfAlg}.
 \end{proof}
 
 \section{Nonclumpiness of Periodic Firing Patterns}\label{nonclumpiness}
-We consider parallel chip-firing game $\s$ on undirected graph $G$. Recall that
-the
-firing pattern of a vertex $v \in \V$ is the binary
+We consider parallel chip-firing game $\s$ on undirected graph $G$. The
+\emph{periodic firing pattern} (PFP) of a vertex $v \in \V$ is the binary
 string
 \[
   \firing{v}{t_0}\dots\firing{v}{t_0 + \period - 1},
 \]
 where $t_0$ is the smallest natural number such that $\pos{t_0}$ is
-periodic. We write the firing pattern of $v$ as $\pfp{v}$. For simplicity, we assume here
-that $t_0 = 0$ and index firing patterns modulo $\period$.
+periodic. We write the PFP of $v$ as $\pfp{v}$. For simplicity, we assume here
+that $t_0 = 0$ and index PFPs modulo $\period$.
 
-Let $\pfps$ be the set of all firing patterns occurring in $\s$. Call a firing pattern with both
+Let $\pfps$ be the set of all PFPs occurring in $\s$. Call a PFP with both
 consecutive 0s and consecutive 1s \emph{clumpy}, and let $\cpfps$ be the set of
-all clumpy firing patterns occurring in $\s$. (Recall that the $\period$\xth and 0\xth
-entries of a firing pattern are the same, so, for example, 011010 is clumpy.) It is known
-that, given any nonclumpy firing pattern, one can construct a parallel chip-firing game on
-a simple cycle in which every vertex has that firing pattern shifted by some number of
-steps~\cite{cycle}. We prove here that clumpy firing patterns cannot occur in any parallel
-chip-firing game, showing that a firing pattern is possible if and only if it is
+all clumpy PFPs occurring in $\s$. (Recall that the $\period$\xth and 0\xth
+entries of a PFP are the same, so, for example, 011010 is clumpy.) It is known
+that, given any nonclumpy PFP, one can construct a parallel chip-firing game on
+a simple cycle in which every vertex has that PFP shifted by some number of
+steps~\cite{cycle}. We prove here that clumpy PFPs cannot occur in any parallel
+chip-firing game, showing that a PFP is possible if and only if it is
 nonclumpy.
 
 \begin{lem}\label{strongbg}
@@ -140,7 +140,7 @@ We define
 \pfpedges{p}{q} &= {\set{\{v,w\} \in \E}{\pfp{v}=p, \pfp{w} = q}} \\
 \misb{S}{p}{q} &= \sum_{i \in S}(p_{i} - q_{i-1})
 \end{align*}
-for binary strings $p$ and $q$. We now prove our main result: clumpy firing patterns do
+for binary strings $p$ and $q$. We now prove our main result: clumpy PFPs do
 not occur in the parallel chip-firing game.
 
 \begin{thm}\label{nct}
@@ -149,10 +149,10 @@ $\size{\pfpverts{p}} = 0$ for all $p \in \cpfps$.
 
 \begin{proof}
 Roughly, summing an inequality given by Lemma~\ref{strongbg} over all vertices
-with clumpy firing patterns bounds a quantity below, and summing an inequality given by
+with clumpy PFPs bounds a quantity below, and summing an inequality given by
 the Theorem~\ref{morale} over all edges incident with a vertex with a clumpy
-firing pattern gives an upper bound on the same quantity. The lower bound is the total
-number of vertices with clumpy firing patterns, and the upper bound is 0.
+PFP gives an upper bound on the same quantity. The lower bound is the total
+number of vertices with clumpy PFPs, and the upper bound is 0.
 
 Let $a,b \in \nats$ and $v \in \V$. Grouping the sum in \eqref{local} by $v$'s
 neighbors instead of time steps yields
@@ -206,8 +206,8 @@ However, $\misb{[0,\period-1]}{q}{p} = 0$ because $p$ and $q$ have the same
 length and number of 1s.
 
 Let $W = \set{v \in \V}{\pfp{v} \in \cpfps}$ be the set of vertices with clumpy
-firing patterns. Choosing $r_{v,X} = -s_X(\pfp{v})$ and splitting the sum in
-\eqref{almost} between neighbors with and without clumpy firing patterns yields
+PFPs. Choosing $r_{v,X} = -s_X(\pfp{v})$ and splitting the sum in
+\eqref{almost} between neighbors with and without clumpy PFPs yields
 \begin{align*}
   \smashoperator[r]{\sum_{\substack{
         p \in \cpfps \\
