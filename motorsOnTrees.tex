@@ -14,26 +14,39 @@ game reaches a periodic position. Therefore, we can simulate the presence of
 the rest of $G$ by having each vertex in $X$ fire with a regular pattern
 regardless of the number of chips it receives.
 
-The $\emph{firing sequence}$ of a vertex $v$ in game $\s$ is the sequence
-$(\firing{v}{t})_{t \in \nats}$. A \emph{motorized parallel chip-firing game},
+A $\emph{firing pattern}$ is a finite binary string representing the behavior
+of a vertex over the course of a period. The firing pattern of a vertex $v$ in
+game $\s$ is
+\[
+  \firing{v}{t_0}\dots\firing{v}{t_0 + \period - 1},
+\]
+where $\period$ is the period of $\s$ and $t_0$ is the first . We will show in
+Section~\ref{nonclumpiness} that some finite strings do not occur as the firing
+pattern of any vertex in any parallel chip-firing game. We call such firing
+patterns \emph{impossible} and call those that do occur in some game
+\emph{possible}.
+
+A \emph{motorized parallel chip-firing game},
 or simply ``motorized game'', on $G$ is a game $\s$ obeying \eqref{gameDef}
 with a non-empty set of \emph{motors} $\mots \subseteq \V$. Each motor follows
-a predetermined firing sequence, firing without regard to the rules bounding
-the number of chips in a normal chip-firing game. For example, a motor may have
+a predetermined periodic firing pattern, firing without regard for the typical
+rules of the normal parallel chip-firing game. For example, a motor may have
 a negative number of chips. The term ``ordinary game'' refers to a game with no
 motors when there is ambiguity. A motorized game is shown in
 Figure~\ref{motorizedTreeNoGlider}.
+
+\begin{centering}
 \begin{figure}
-  \centering
   \subfloat{\includegraphics[width=\figWidthA]{Figures/motorizedTreeNoGlider}}
   \subfloat{\includegraphics[width=\figWidthB]{Figures/keyShortish}}
-  \caption{A motorized parallel chip-firing game. The motor has firing sequence
-    $(1,0,0,0,0,1,0,0,0,0,\dots)$.}
+  \caption{A motorized parallel chip-firing game. The motor has firing pattern
+    $(1,0,0,0,0)$.}
   \label{motorizedTreeNoGlider}
 \end{figure}
+\end{centering}
 
-If a motorized game $\s$ is eventually periodic (which is the case if every
-motor's firing sequence is eventually periodic), then just as in an ordinary
+As all motors have periodic firing patterns, motorized games are
+eventually periodic, and just as in an ordinary
 game, every vertex fires the same number of times each period.  The proof is
 identical to the proof of this fact for ordinary games~\cite{jiang}: all
 neighbors of the vertex that fires the most times each period must also fire

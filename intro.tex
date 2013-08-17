@@ -33,14 +33,16 @@ though the definition of the game can be easily generalized for arbitrary
 multidigraphs. An example game is illustrated in Figure~\ref{example}. Given a
 parallel chip-firing game as $\s$, we refer to the chip configuration, also
 called the position, at a particular time $t \in \nats$ as $\pos{t}$.
+
+\begin{centering}
 \begin{figure}[h]
-\centering
 \subfloat{\includegraphics[width=\figWidthA]{Figures/example}}
 \subfloat{\includegraphics[width=\figWidthB]{Figures/keyShort}}
 \caption{A parallel chip-firing game. From an initial position in the upper
   left, the game eventually enters a period of length 4.}
 \label{example}
 \end{figure}
+\end{centering}
 
 The total number of chips on all vertices of the graph is constant throughout a
 game, so there are finitely many possible positions in every game. Therefore,
@@ -48,12 +50,8 @@ every game eventually reaches a position $\pos{t}$ that is identical to a later
 position $\pos{t+p}$ for some $t,p \in \nats$ with $p > 0$. (We write $\pos{t}
 = \pos{t+p}$.) The game is deterministic, so $\pos{t+n} = \pos{t+n+p}$ for all
 $n \in \nats$. Thus, every parallel chip-firing game is eventually periodic.
-
-In this paper, we concern ourselves with both \emph{firing sequences} and
-\emph{periodic firing patterns} of vertices. Each is a binary string
-representing whether or not a particular vertex fires or waits each turn. The
-sequence covers all times from 0 to infinity, while the periodic pattern covers
-just one period.
+In this paper, we especially concern ourselves with the periodic \emph{firing
+  patterns} of individual vertices.
 
 \subsection*{Previous Work}
 The periodicity of the parallel chip-firing game gives rise to two
@@ -80,7 +78,7 @@ positions of games on cycles.
 
 \subsection*{Our Results}
 We hope to advance the understanding of both of these questions through the
-study of firing sequences and periodic firing patterns.
+study of firing patterns.
 
 After precisely defining the parallel chip-firing game in Section~\ref{pres},
 the first half of the paper develops a new tool for studying the chip-firing
@@ -90,12 +88,12 @@ normal chip-firing rules. Games with motors are called \emph{motorized
 parallel chip-firing games. In Section~\ref{motors} we show that vertices
 always ``follow'' a motor in periodic motorized games on trees. In
 Section~\ref{simulatingMotors}, we prove that periodic motorized games can be
-transformed into ordinary games as long as the firing sequence of each motor
-occurs in an ordinary game.
+transformed into ordinary games as long as the firing pattern of each motor
+occurs in some ordinary game.
 
 The second half of the paper characterizes the possible periodic firing
 patterns in parallel chip-firing games. Section~\ref{binSeq} briefly steps away
-from the game to study certain signed sums of periodic binary sequences. The
+from the game to study certain signed sums of periodic binary strings. The
 result is an inequality applicable to edges of the graph of a parallel
 chip-firing game. In Section~\ref{nonclumpiness}, we sum this inequality over
 all relevant edges to show that periodic firing patterns with both consecutive

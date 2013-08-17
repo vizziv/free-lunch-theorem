@@ -1,29 +1,30 @@
 \section{Simulating Motors} \label{simulatingMotors}
 \showgame
 
-In this section, we consider multiple chip-firing games at once, so we include
-the subscripts and superscripts in, for example, $\deg[G]{v}$ and
+In this section, in order to refer to multiple chip-firing games unambiguously,
+we include the subscripts and superscripts in, for example, $\deg[G]{v}$ and
 $\firing{v}{t}$.
 
-We call a firing sequence $(f_t)_{t \in \nats}$ \emph{possible} if there exists
-an ordinary game $\s$ on some graph $G$ such that $\firing{v}{t} = f_{t}$ for
-all $t \in \nats$. Our next theorem states that we can simulate motorized games
-with ordinary games as long as every motor's firing sequence is
+Recall that not all firing patterns are possible in ordinary games.
+Our next theorem states that we can simulate motorized games
+with ordinary games as long as every motor's firing pattern is
 possible. Figure~\ref{natMot} demonstrates the concept.
+
+\begin{centering}
 \begin{figure}[tbh]
-  \centering
   \subfloat{\includegraphics[width=\figWidthA]{Figures/natMotor}}
   \subfloat{\includegraphics[width=\figWidthB]{Figures/keyShortish2}}
-  \caption{Suppose the motor in motorized game (b) has firing sequence
-    $(0,0,0,0,1,0,0,0,\dots)$. This occurs in ordinary game (a). By using
+  \caption{Suppose the motor in motorized game (b) has firing pattern
+    $(0,0,0,0,1,0,0,0)$. This occurs in ordinary game (a). By using
     sufficiently many copies of (a) and carefully choosing $n$, we construct
     (c). The behavior of $G$ in (c) is identical to the behavior of $G$ in
     (b).}
 \label{natMot}
 \end{figure}
+\end{centering}
 
 \begin{thm} \label{natMotors}
-Let $\s$ be a periodic motorized game on $G$. If every motor's firing sequence
+Let $\s$ be a periodic motorized game on $G$. If every motor's firing pattern
 is possible, then there exists an ordinary game $\s'$ on a graph $H \supseteq
 G$ such that
 \begin{itemize}
@@ -37,7 +38,7 @@ G$ such that
 
 \begin{proof}
 Our approach will be, for each $m \in \mots$, to attach many copies of a graph
-with a vertex with $m$'s firing sequence to $m$. If sufficiently many copies
+with a vertex with $m$'s firing pattern to $m$. If sufficiently many copies
 are attached, the number of chips $m$ has due to its neighbors in $G$ becomes
 irrelevant as to whether or not it fires.
 
