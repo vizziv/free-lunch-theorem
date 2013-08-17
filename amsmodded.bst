@@ -1178,17 +1178,22 @@ FUNCTION {longest.label.pass}
       if$
     }
     'author
-  %if$
-  %'this.author :=
+  if$
+  'this.author :=
+  % The one change from amsplain: don't omit repeated author names.
+  % Ziv doesn't know this language, but it works now.
+  % Instead of comparing the current author to the previous, compare 0 to 1.
+  % (This has always been false... so far.)
+  "0" "1" =
   %this.author prev.author =
-  %  { "\bysame" 'bysame := }
-  %  { "" 'bysame :=
-  %    this.author "" =
-  %      { "abcxyz" }
-  %      'this.author
-  %    if$
-  %    'prev.author :=
-  %  }
+    { "\bysame" 'bysame := }
+    { "" 'bysame :=
+      this.author "" =
+        { "abcxyz" }
+        'this.author
+      if$
+      'prev.author :=
+    }
   if$
 }
 
