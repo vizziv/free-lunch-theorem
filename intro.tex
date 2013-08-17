@@ -31,8 +31,8 @@ The parallel chip-firing game is played on a graph as follows:
 Here we will only consider games on finite, undirected, connected graphs,
 though the definition of the game can be easily generalized for arbitrary
 multidigraphs. An example game is illustrated in Figure~\ref{example}. Given a
-parallel chip-firing game as $\s$, we refer to the chip configuration, also called the position, at a
-particular time $t \in \nats$ as $\pos{t}$.
+parallel chip-firing game as $\s$, we refer to the chip configuration, also
+called the position, at a particular time $t \in \nats$ as $\pos{t}$.
 \begin{figure}[h]
 \centering
 \subfloat{\includegraphics[width=\figWidthA]{Figures/example}}
@@ -61,15 +61,16 @@ questions. First, what characteristics of a game and its underlying graph
 determine the length of a period? It is known exactly what periods are possible
 on certain classes of graphs, such as trees~\cite{bitarGoles}, simple
 cycles~\cite{cycle}, the complete graph~\cite{levine}, and the complete
-bipartite graph~\cite{jiang}. For these graphs, the maximum period lengths are bounded by the number of vertices, but Kiwi et al.~\cite{kiwiEtAl} constructed graphs on
-which the period of games can grow exponentially with polynomial increase in
-the number of vertices. There are also results regarding the total number of
-chips in a game. Kominers and Kominers~\cite{kominers} showed that games with a
-sufficiently large density of chips must have period~1. Dall'Asta~\cite{cycle}
-and Levine~\cite{levine}, in their respective characterizations of periods on
-cycles and complete graphs, related the total number of chips to a game's
-\emph{activity}, the fraction of turns during which a vertex fires. The
-denominator of the activity must divide the period.
+bipartite graph~\cite{jiang}. For these graphs, the maximum period lengths are
+bounded by the number of vertices, but Kiwi et al.~\cite{kiwiEtAl} constructed
+graphs on which the period of games can grow exponentially with polynomial
+increase in the number of vertices. There are also results regarding the total
+number of chips in a game. Kominers and Kominers~\cite{kominers} showed that
+games with a sufficiently large density of chips must have
+period~1. Dall'Asta~\cite{cycle} and Levine~\cite{levine}, in their respective
+characterizations of periods on cycles and complete graphs, related the total
+number of chips to a game's \emph{activity}, the fraction of turns during which
+a vertex fires. The denominator of the activity must divide the period.
 
 Second, we notice that some but not all positions $\pos{t}$ are
 \emph{periodic}, satisfying $\pos{t} = \pos{t+p}$ for some positive $p \in

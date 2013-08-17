@@ -1,11 +1,11 @@
 \section{Signed Sums of Binary Sequences}\label{binSeq}
 Throughout this section, if $b \in \{0,1\}$, we may write $\ol{b} = 1-b$.
 
-We take a break from the parallel chip-firing game to consider  binary
-strings. We denote the $i$\xth element of a binary string $p$ as
-$p_i$. For simplicity, any integer equivalent to $i \bmod n$ may replace
-$i$. Let a \emph{$b$-sector} of $p$, where $b \in \{0,1\}$, be an integer
-interval $[x,y]$ such that
+We take a break from the parallel chip-firing game to consider binary
+strings. We denote the $i$\xth element of a binary string $p$ as $p_i$. For
+simplicity, any integer equivalent to $i \bmod n$ may replace $i$. Let a
+\emph{$b$-sector} of $p$, where $b \in \{0,1\}$, be an integer interval $[x,y]$
+such that
 \begin{align*}
   p_x = p_{y-1} = p_y &= b \\
   p_{x-1} = p_{x-2} &= \ol{b} \\
@@ -49,13 +49,14 @@ Our main theorem in this section concerns the sum
   M_S(p,q) = \sum_{i \in S}(s_i(p)(p_i - q_{i-1}) + s_i(q)(q_i - p_{i-1}) -
   \delta_i(p) - \delta_i(q)),
 \end{equation}
-where  $p,q$ are length-$n$ binary sequences and $S \subseteq [0, n-1]$. This sum, superficially speaking, measures each
-sequence's ``disagreement'' with the other shifted back one step minus the
-number of sector switches. The rules of the parallel chip-firing game put a
-global upper bound on the total disagreement between vertices, yet the
-following theorem says that sector switches require disagreement. We show in
-Section~\ref{nonclumpiness} that this implies that firing sequences with sector
-switches are impossible once a game has become periodic.
+where $p,q$ are length-$n$ binary sequences and $S \subseteq [0, n-1]$. This
+sum, superficially speaking, measures each sequence's ``disagreement'' with the
+other shifted back one step minus the number of sector switches. The rules of
+the parallel chip-firing game put a global upper bound on the total
+disagreement between vertices, yet the following theorem says that sector
+switches require disagreement. We show in Section~\ref{nonclumpiness} that this
+implies that firing sequences with sector switches are impossible once a game
+has become periodic.
 
 \begin{thm}\label{morale}
 $M_{[0,n-1]}(p,q) \geq 0$.
@@ -148,11 +149,10 @@ $\size{\pfpverts{p}} = 0$ for all $p \in \cpfps$.
 
 \begin{proof}
 Roughly, summing an inequality given by Lemma~\ref{strongbg} over all vertices
-with clumpy PFPs bounds a quantity below, and summing an
-inequality given by the Theorem~\ref{morale} over all edges incident with a
-vertex with a clumpy PFP gives an upper bound on the same quantity. The lower
-bound is the total number of vertices with clumpy PFPs, and the upper bound is
-0.
+with clumpy PFPs bounds a quantity below, and summing an inequality given by
+the Theorem~\ref{morale} over all edges incident with a vertex with a clumpy
+PFP gives an upper bound on the same quantity. The lower bound is the total
+number of vertices with clumpy PFPs, and the upper bound is 0.
 
 Let $a,b \in \nats$ and $v \in \V$. Grouping the sum in \eqref{local} by $v$'s
 neighbors instead of time steps yields
