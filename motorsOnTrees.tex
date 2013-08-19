@@ -47,10 +47,10 @@ We define
   \pat{v}{f} = \set{t \in \nats}{\firing{v}{t} = f}.
 \]
 Call an interval $[a, b]$ with $a < b$ a \emph{max-clump} of $v \in \V$ if and
-only if $[a, b] \in \pat{v}{f}$ and $\firing{v}{a-1} = \firing{v}{b+1} = 1-f$,
-where $f \in \{0,1\}$. Given $v \in \V$, we can express $\nats$ as the union of
-max-clumps of $v$ and times during which $v$ alternates between firing and
-waiting.
+only if $[a, b] \subseteq \pat{v}{f}$ and $\firing{v}{a-1} = \firing{v}{b+1} =
+1-f$, where $f \in \{0,1\}$. Given $v \in \V$, we can express $\nats$ as the
+union of max-clumps of $v$ and times during which $v$ alternates between firing
+and waiting.
 
 The proof of Theorem~\ref{cheapLunch} follows the same structure as the proof
 that ordinary games on trees have period~1 or~2~\cite{bitarGoles}. In fact, we
@@ -58,8 +58,8 @@ rely on a lemma originally introduced for that proof.
 
 \begin{lem}[{\cite[Lemma 1]{bitarGoles}}] \label{bitarGoles}
 Let $\s$ be a game on $G$. For all $v \in \V$ and $f \in \{0,1\}$, if $[a, b]
-\in \pat{v}{f}$, then there exists $w \in \N{v}$ such that $[a-1, b-1] \in
-\pat{w}{f}$.
+\subseteq \pat{v}{f}$, then there exists $w \in \N{v}$ such that $[a-1, b-1]
+\subseteq \pat{w}{f}$.
 \end{lem}
 
 Less technically, every burst of firing or waiting by a vertex must be
@@ -68,8 +68,8 @@ pigeonhole principle and Lemma~\ref{strongbg}, which we state and prove later.
 
 \begin{thm} \label{cheapLunch}
 Let $\s$ be a periodic motorized game on tree $T$. For all $v \in \V[T]$ and $f
-\in \{0,1\}$ , if $[a, b] \in \pat{v}{f}$, then $[a-D, b-D] \in \pat{m}{f}$ for
-some $m \in \mots$, where $D$ is the distance from $m$ to $v$.
+\in \{0,1\}$ , if $[a, b] \subseteq \pat{v}{f}$, then $[a-D, b-D] \subseteq
+\pat{m}{f}$ for some $m \in \mots$, where $D$ is the distance from $m$ to $v$.
 \end{thm}
 
 \begin{proof}
@@ -118,8 +118,8 @@ period~\cite[Proposition~2.5]{jiang}, so $v$ must have at least one max-clump,
 again because $m$ does. For every max-clump $[a, b] \subseteq \pat{v}{f}$,
 $[a-D, b-D] \subseteq \pat{m}{f}$, where $f \in \{0,1\}$. The non-max-clump
 intervals of $v$'s firing sequence are alternations between 0 and 1, starting
-and ending with $1-f$. The same is true of $m$ for it to fire the same number
-of times each period as $v$.
+and ending with $1-f$. The same must be true of $m$ for it to fire the same
+number of times each period as $v$.
 \end{proof}
 
 The reason we require the games in Theorem~\ref{cheapLunch} and
