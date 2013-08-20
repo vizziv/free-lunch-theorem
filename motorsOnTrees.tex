@@ -18,11 +18,12 @@ The $\emph{firing sequence}$ of a vertex $v$ in game $\s$ is the sequence
 $(\firing{v}{t})_{t \in \nats}$. A \emph{motorized parallel chip-firing game},
 or simply ``motorized game'', on $G$ is a game $\s$ obeying \eqref{gameDef}
 with a non-empty set of \emph{motors} $\mots \subseteq \V$. Each motor follows
-a predetermined firing sequence, firing without regard to the rules bounding
-the number of chips in a normal chip-firing game. For example, a motor may have
-a negative number of chips. The term ``ordinary game'' refers to a game with no
-motors when there is ambiguity. A motorized game is shown in
-Figure~\ref{motorizedTreeNoGlider}.
+a predetermined firing sequence, firing without regard for the normal rules of
+the parallel chip-firing game, which means, for example, that a motor may have
+a negative number of chips. Put another way, for each $m \in \mots$,
+$\firing{m}{t}$ does not depend on $\chips{m}{t}$. The term ``ordinary game''
+refers to a game with no motors when there is ambiguity. A motorized game is
+shown in Figure~\ref{motorizedTreeNoGlider}.
 
 \begin{centering}
 \begin{figure}[tbh]
