@@ -58,9 +58,9 @@ switches require disagreement. We show in Section~\ref{nonclumpiness} that this
 implies that firing sequences with sector switches are impossible once a game
 has become periodic.
 
-\begin{thm}\label{morale}
+\begin{theorem}\label{morale}
 $M_{[0,n-1]}(p,q) \geq 0$.
-\end{thm}
+\end{theorem}
 
 \begin{proof}
 We can caculate $M_{[0,n-1]}(p,q)$ as $\sum_{i=0}^{n-1}M_{\{i\}}(p,q)$, and
@@ -88,7 +88,7 @@ sequence of vertices $(\mu_0(p,q), \dots, \mu_{n-1}(p,q),
 cycles. Running the Bellman-Ford algorithm~\cite{bellmanford} on $\G$ shows
 this to be the case. We describe $\G$ and the algorithm in a Python program in
 Appendix~\ref{bfAlg}.
-\end{proof}
+\qquad\end{proof}
 
 \section{Nonclumpiness of Periodic Firing Patterns}\label{nonclumpiness}
 We consider parallel chip-firing game $\s$ on undirected graph $G$. The
@@ -119,13 +119,13 @@ in which every vertex has that PFP shifted by some number of
 steps~\cite{cycle}. We prove here that clumpy PFPs cannot occur in any parallel
 chip-firing game.
 
-\begin{lem}\label{strongbg}
+\begin{lemma}\label{strongbg}
 For all $v \in \V$ and $a, b \in \nats$,
 \begin{equation}\label{local}
   -\deg{v} + 1 \leq \sum_{t=a}^{b}(\receiving{v}{t-1} - \deg{v}\firing{v}{t})
   \leq \deg{v}-1.
 \end{equation}
-\end{lem}
+\end{lemma}
 
 \begin{proof}
 We express $\chips{v}{b}$ in terms of $\chips{v}{a-1}$.
@@ -140,7 +140,7 @@ We express $\chips{v}{b}$ in terms of $\chips{v}{a-1}$.
 Recall that $0 \leq \chips{v}{t} - \deg{v}\firing{v}{t} \leq \deg{v} - 1$ for
 all $t \in \nats$ such that $\pos{t}$ is periodic, which gives the desired
 inequality.
-\end{proof}
+\qquad\end{proof}
 
 We define
 \begin{align*}
@@ -151,9 +151,9 @@ We define
 for binary strings $p$ and $q$. We now prove our main result: clumpy PFPs do
 not occur in the parallel chip-firing game.
 
-\begin{thm}\label{nct}
+\begin{theorem}\label{nct}
 $\size{\pfpverts{p}} = 0$ for all $p \in \cpfps$.
-\end{thm}
+\end{theorem}
 
 \begin{proof}
 Roughly, summing an inequality given by Lemma~\ref{strongbg} over all vertices
@@ -254,4 +254,4 @@ The last line follows from Theorem~\ref{morale}, and when we sum over $p,q \in
 \cpfps$, we consider $p$ and $q$ unordered. (A sum over $\{p,q\} \subseteq
 \cpfps$ is one alternative notation.) Sets have nonnegative sizes, so
 $\size{\pfpverts{p}} = 0$ for all $p \in \cpfps$.
-\end{proof}
+\qquad\end{proof}

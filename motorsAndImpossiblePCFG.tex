@@ -1,10 +1,10 @@
-\documentclass[11pt]{amsart}
+\documentclass{siamltex}
 \pdfoutput=1
-\usepackage{amsmath, amssymb, amsthm, graphicx, subfig, mathrsfs, calc, xspace,
+\usepackage{amsmath, amssymb, graphicx, subfig, mathrsfs, calc, xspace,
   mathtools, ifthen, booktabs, longtable, comment, setspace, verbatim,
   placeins}
-\usepackage[colorlinks=true]{hyperref}
-\hypersetup{urlcolor=blue, citecolor=red}
+\usepackage[colorlinks=false]{hyperref}
+%\hypersetup{urlcolor=blue, citecolor=red}
 \newlength{\figWidthA}
 \newlength{\figWidthB}
 
@@ -45,11 +45,6 @@
 \newcommand{\pfps}[1][\s]{P\gamename{#1}}
 \newcommand{\cpfps}[1][\s]{Q\gamename{#1}}
 
-% Theorem
-\newtheorem{thm}{Theorem}[section]
-\newtheorem{lem}[thm]{Lemma}
-\newtheorem{cor}[thm]{Corollary}
-\newtheorem{conj}[thm]{Conjecture}
 \numberwithin{equation}{section}
 
 \begin{document}
@@ -57,11 +52,14 @@
 \setlength\figWidthA{.72\textwidth}
 \setlength\figWidthB{.28\textwidth}
 
-\title[Motors and Impossible Firing Patterns in the PCFG]{Motors and Impossible
+\title{Motors and Impossible
   Firing Patterns in the\\Parallel Chip-Firing Game}
 \author{Tian-Yi Jiang, Ziv Scully, Yan X Zhang}
-\address{Massachusetts Institute of Technology}
-\email{jiangty@mit.edu, ziv@mit.edu, yanzhang@post.harvard.edu}
+\pagestyle{myheadings}
+\thispagestyle{plain}
+\markboth{Tian-Yi Jiang, Ziv Scully, Yan X Zhang}{Motors and Impossible Patterns in Chip-Firing}
+%\address{Massachusetts Institute of Technology}
+%\email{jiangty@mit.edu, ziv@mit.edu, yanzhang@post.harvard.edu}
 \begin{abstract}
 \input{abstract}
 \end{abstract}

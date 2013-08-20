@@ -11,10 +11,10 @@ row fires more than half the time. We cannot have a vertex that waits twice
 in a row and a vertex that fires twice in a row in the same periodic game
 because each vertex fires the same number of times each period.
 
-\begin{cor}
+\begin{corollary}
 Once a parallel chip-firing game reaches a periodic position, either no vertex
 fires twice in a row or no vertex waits twice in a row.
-\end{cor}
+\end{corollary}
 
 That is, in periodic games, a firing sequence is possible if and only if it is
 nonclumpy.
@@ -25,14 +25,14 @@ firing) neighbors will wait (or fire) the following turn as well, the above
 observation proves the following conjecture of Fey and
 Levine~\cite{privateComms}.
 
-\begin{cor}\label{feyLevine}
+\begin{corollary}\label{feyLevine}
 Let $\sigma$ be a periodic game on $G$,
 \begin{align*}
   A &= \set{v \in \V}{\firing{v}{a} = 0} \\
   B &= \set{v \in \V}{\firing{v}{b} = 1},
 \end{align*}
 where $a,b \in \nats$. Then either $I(A)$ or $I(B)$ is empty.
-\end{cor}
+\end{corollary}
 
 Interestingly, Corollary~\ref{feyLevine} also implies Theorem~\ref{nct}. If
 clumpy PFPs were possible, then a leaf attached to a motor with a clumpy PFP
@@ -45,7 +45,7 @@ behavior on tree-like subgraphs---subgraphs such that, if an edge to a root
 vertex is cut, become a tree separated from the rest of the graph---by making
 the root vertex a motor.
 
-\begin{cor}
+\begin{corollary}
 Let $\s$ be a periodic game on $G$ with $\period \geq 3$ in which no vertex
 fires twice in a row, $H$ be a tree-like subgraph of $G$ and $m \in \V[H]$ be
 the root of $H$. Then for all $v \in \V[H]$,
@@ -58,14 +58,14 @@ the root of $H$. Then for all $v \in \V[H]$,
 \]
 where $D$ is the distance from $m$ to $v$. An analogous result holds if no
 vertex waits twice in a row.
-\end{cor}
+\end{corollary}
 
 In some sense, tree-like subgraphs are passive in that their vertices fire only
 in response to their root-side neighbor firing. In a periodic game, we can
 completely remove tree-like subgraphs without affecting the PFPs of the other
 vertices.
 
-\begin{cor}
+\begin{corollary}
 Let $\s$ be a periodic game on $G$ and $l \in \V$ be a leaf with $\N{l} =
 \{m\}$. Suppose that no vertex fires twice in a row. Let $G'$ be the subgraph
 of $G$ induced by $\V \setminus \{l\}$. Define $\s'$ on $G'$ such that
@@ -77,7 +77,7 @@ $\chips[\s']{v}{0} = \chips{v}{0}$ for all $v \in \V \setminus \{m\}$. Then
   \end{cases}
 \]
 An analogous result holds if no vertex waits twice in a row.
-\end{cor}
+\end{corollary}
 
 Compared to $\s'$, $m$ has to have an extra chip to fire in $\s$. However,
 unless $m$ fired the previous turn---which, because $l$ is a leaf, is

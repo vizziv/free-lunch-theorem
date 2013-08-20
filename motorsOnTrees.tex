@@ -57,21 +57,21 @@ The proof of Theorem~\ref{cheapLunch} follows the same structure as the proof
 that ordinary games on trees have period~1 or~2~\cite{bitarGoles}. In fact, we
 rely on a lemma originally introduced for that proof.
 
-\begin{lem}[{\cite[Lemma 1]{bitarGoles}}] \label{bitarGoles}
+\begin{lemma}[{\cite[Lemma 1]{bitarGoles}}] \label{bitarGoles}
 Let $\s$ be a game on $G$. For all $v \in \V$ and $f \in \{0,1\}$, if $[a, b]
 \subseteq \pat{v}{f}$, then there exists $w \in \N{v}$ such that $[a-1, b-1]
 \subseteq \pat{w}{f}$.
-\end{lem}
+\end{lemma}
 
 Less technically, every burst of firing or waiting by a vertex must be
 supported by at least one of its neighbors. The lemma follows from the
 pigeonhole principle and Lemma~\ref{strongbg}, which we state and prove later.
 
-\begin{thm} \label{cheapLunch}
+\begin{theorem} \label{cheapLunch}
 Let $\s$ be a periodic motorized game on tree $T$. For all $v \in \V[T]$ and $f
 \in \{0,1\}$ , if $[a, b] \subseteq \pat{v}{f}$, then $[a-D, b-D] \subseteq
 \pat{m}{f}$ for some $m \in \mots$, where $D$ is the distance from $m$ to $v$.
-\end{thm}
+\end{theorem}
 
 \begin{proof}
 The fact that $\s$ is periodic means we need not worry about negative turn
@@ -100,17 +100,17 @@ $[a_i, b_i] \cup [a_{i-2}, b_{i-2}] \subseteq \pat{v_i}{f}$. However, $[a_{i-2}
   - 2, b_{i-2} - 2] \subseteq [a_i, b_i]$, so $[a_{i-2} - 2, b_{i-2}] \subseteq
 \pat{v_i}{f}$. Therefore, $[a_{i-2}, b_{i-2}]$ is not a max-clump, a
 contradiction, so $v_i \neq v_{i-2}$ for all $i$.
-\end{proof}
+\qquad\end{proof}
 
 Call a firing sequence \emph{clumpy} if it contains two consecutive 0s and two
 consecutive 1s; otherwise, call it \emph{nonclumpy}.
 
-\begin{cor} \label{freeLunch}
+\begin{corollary} \label{freeLunch}
 Let $\s$ be a periodic motorized game on tree $M$ with a single motor $m$. If
 $m$ has a nonclumpy firing sequence but has at least one max-clump, then
 $\firing{v}{t+D} = \firing{m}{t}$ for all $v \in \V[T]$ and $t \in \nats$,
 where $D$ is the distance from $v$ to $m$.
-\end{cor}
+\end{corollary}
 
 \begin{proof}
 Let $v \in \V[T]$. By Theorem~\ref{cheapLunch}, $v$ has a nonclumpy firing
@@ -121,7 +121,7 @@ $[a-D, b-D] \subseteq \pat{m}{f}$, where $f \in \{0,1\}$. The non-max-clump
 intervals of $v$'s firing sequence are alternations between 0 and 1, starting
 and ending with $1-f$. The same must be true of $m$ for it to fire the same
 number of times each period as $v$.
-\end{proof}
+\qquad\end{proof}
 
 The reason we require the games in Theorem~\ref{cheapLunch} and
 Corollary~\ref{freeLunch} to be periodic is to consider arbitrarily many past

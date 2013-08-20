@@ -24,7 +24,7 @@ possible. Figure~\ref{natMot} demonstrates the concept.
 \end{figure}
 \end{centering}
 
-\begin{thm} \label{natMotors}
+\begin{theorem} \label{natMotors}
 Let $\s$ be a periodic motorized game on $G$. If every motor's firing sequence
 is possible, then there exists an ordinary game $\s'$ on a graph $H \supseteq
 G$ such that
@@ -35,7 +35,7 @@ G$ such that
 \item the subgraph of $H$ induced by $V(G)$ is $G$. (That is, $H$ contains no
   edges between vertices of $G$ that are not also in $G$.)
 \end{itemize}
-\end{thm}
+\end{theorem}
 
 \begin{proof}
 Our approach will be, for each $m \in \mots$, to attach many copies of a graph
@@ -110,7 +110,7 @@ We can distribute chips in $\pos[\s']{0}$ such that it satisfies (1), (2), and
 (3), in which case, by induction, $\pos[\s']{t}$ satisfies (1), (2), and (3)
 for all $t \in \nats$, implying $\firing[\s']{v}{t} = \firing{v}{t}$ for all $v
 \in V(G)$.
-\end{proof}
+\qquad\end{proof}
 
 Again, we may relax the condition that the game be periodic. In this case, the
 periodicity ensures that the number of chips on each motor is bounded. This is
