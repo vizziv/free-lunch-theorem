@@ -52,9 +52,16 @@
 \setlength\figWidthA{.72\textwidth}
 \setlength\figWidthB{.28\textwidth}
 
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
 \title{Motors and Impossible
   Firing Patterns in the\\Parallel Chip-Firing Game}
-\author{Tian-Yi Jiang, Ziv Scully, Yan X Zhang}
+\author{Tian-Yi Jiang\footnotemark[1], Ziv Scully\footnotemark[1], Yan X
+  Zhang\footnotemark[1] \footnotemark[2]}
+\footnotetext[1]{Massachusetts Institute of Technology, 77 Massachusetts Ave,
+  Cambridge, MA 02139.}
+\footnotetext[2]{Supported by an NSF Graduate Fellowship.}
+\renewcommand{\thefootnote}{\arabic{footnote}}
+
 \pagestyle{myheadings}
 \thispagestyle{plain}
 \markboth{Tian-Yi Jiang, Ziv Scully, Yan X Zhang}{Motors and Impossible Patterns in Chip-Firing}
@@ -85,8 +92,7 @@
 We thank the MIT PRIMES program for supporting the research that brought us
 together. We thank Tiankai Liu for improving upon a previous proof of
 Theorem~\ref{morale}. We would also like to thank Anne Fey, Lionel Levine and
-Tanya Khovanova for helpful discussions. Yan X Zhang was supported by an NSF
-Graduate Fellowship.
+Tanya Khovanova for helpful discussions.
 
 \bibliographystyle{amsmodded}
 \bibliography{refs}
