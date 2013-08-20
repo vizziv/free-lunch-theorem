@@ -38,7 +38,7 @@ def validVert(mu1):
     (p0, p1, s1, s2, q0, q1, t1, t2) = mu1
     return (p0==s1 if p0==p1 else s1==s2) and (q0==t1 if q0==q1 else t1==t2)
 
-# Checks if u can be followed by v.
+# Checks if the first state can be followed by the second.
 def validEdge(mu1, mu2):
     (p0a, p1a, s1a, s2a, q0a, q1a, t1a, t2a) = mu1
     (p1b, p2b, s2b, s3b, q1b, q2b, t2b, t3b) = mu2
