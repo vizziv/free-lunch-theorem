@@ -3,13 +3,14 @@ It is a basic property of the parallel chip-firing game that every vertex fires
 the same number of times each period~\cite{jiang}. This means, roughly
 speaking, that every periodic game is either ``mostly waiting'' with bursts of
 firing or ``mostly firing'' with bursts of waiting. (In fact, there is a
-bijection between them. Each periodic game has a complement that inverts firing
-and waiting~\cite{jiang}.) This is because if a vertex waits twice in a row,
-then because it therefore never fires twice in a row, it fires less than half
-the time over the course of a period. Similarly, a vertex that fires twice in a
-row fires more than half the time. We cannot have a vertex that waits twice
-in a row and a vertex that fires twice in a row in the same periodic game
-because each vertex fires the same number of times each period.
+bijection between these two types of games. Each periodic game has a complement
+that inverts firing and waiting~\cite{jiang}.) This is because if a vertex
+waits twice in a row, then because it therefore never fires twice in a row, it
+fires less than half the time over the course of a period. Similarly, a vertex
+that fires twice in a row fires more than half the time. We cannot have a
+vertex that waits twice in a row and a vertex that fires twice in a row in the
+same periodic game because each vertex fires the same number of times each
+period.
 
 \begin{cor}
 Once a parallel chip-firing game reaches a periodic position, either no vertex
@@ -79,8 +80,8 @@ $\chips[\s']{v}{0} = \chips{v}{0}$ for all $v \in \V \setminus \{m\}$. Then
 An analogous result holds if no vertex waits twice in a row.
 \end{cor}
 
-Compared to $\s'$, $m$ has to have an extra chip to fire in $\s$. However,
-unless $m$ fired the previous turn---which, because $l$ is a leaf, is
+Compared to $\s'$, vertex $m$ has to have an extra chip to fire in $\s$.
+However, unless $m$ fired the previous turn---which, because $l$ is a leaf, is
 equivalent to saying $l$ is firing this turn---$m$ will have received the extra
 chip back from $l$, so removing both $l$ and the chip has no effect on $m$ as
 long as $m$ does not fire while $l$ has a chip. This corollary concerns a leaf,
