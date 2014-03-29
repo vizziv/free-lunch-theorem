@@ -1,25 +1,18 @@
 \section{Signed Sums of Binary Sequences}\label{binSeq}
-Throughout this section, if $b \in \{0,1\}$, we may write $\ol{b} = 1-b$.
-
 We take a break from the parallel chip-firing game to consider binary
 strings. We denote the $i$\xth element of a binary string $p$ as $p_i$. For
-simplicity, any integer equivalent to $i \bmod n$ may replace $i$. Let a
-\emph{$b$-sector} of $p$, where $b \in \{0,1\}$, be an integer interval $[x,y]$
-such that
-\begin{align*}
-  p_x = p_{y-1} = p_y &= b \\
-  p_{x-1} = p_{x-2} &= \ol{b} \\
-  \forall i \in [x+1, y-3]: p_i + p_{i+1} &\neq 2\ol{b}.
-\end{align*}
-That is, the image of a 0-sector is preceded by two 1s, starts with 0, ends
-with two 0s and contains no two consecutive 1s. The same statements with 0s and
-1s swapped are true for 1-sectors. Roughly speaking, $b$-sectors have no two
-$\ol{b}$s in a row and extend as far back as possible.
+simplicity, any integer equivalent to $i \bmod n$ may replace $i$. Throughout
+this section, $b \in \{0,1\}$ and $\ol{b} = 1-b$.
 
-It is easy to see that almost any string can be partitioned into 0- and
-1-sectors in exactly one way, with exceptions only for always-alternating
-strings (e.g.\ 010101) that can be thought of as one 0-sector or one
-1-sector. Figure~\ref{sectorEx} has an example.
+Given a binary string $p$, we say an index $i$ is \emph{in a $b$-region} of $p$
+if either $p_{i-1} = p_i = b$ or $p_{i-1} \neq p_i$ and $p_{i+1}$ is in a
+$b$-sector. A \emph{$b$-sector} of $p$ is a maximal integer interval such that
+all of its member indices are in a $b$-region of $p$. Roughly speaking,
+$b$-sectors have no two $\ol{b}$s in a row and extend as far back as possible.
+See Figure~\ref{sectorEx} for an example. It is easy to see that almost any
+string can be partitioned into 0- and 1-sectors in exactly one way, with
+exceptions only for always-alternating strings (e.g.\ 010101) that can be
+thought of as one 0-sector or one 1-sector.
 
 \begin{figure}
   \[
@@ -49,21 +42,21 @@ Our main theorem in this section concerns the sum
   M_S(p,q) = \sum_{i \in S}(s_i(p)(p_i - q_{i-1}) + s_i(q)(q_i - p_{i-1}) -
   \delta_i(p) - \delta_i(q)),
 \end{equation}
-where $p,q$ are length-$n$ binary sequences and $S \subseteq [0, n-1]$. This
-sum, superficially speaking, measures each sequence's ``disagreement'' with the
-other shifted back one step minus the number of sector switches. The rules of
-the parallel chip-firing game put a global upper bound on the total
-disagreement between vertices, yet the following theorem says that sector
-switches require disagreement. We show in Section~\ref{nonclumpiness} that this
-implies that firing sequences with sector switches are impossible once a game
-has become periodic.
+where $p,q$ are length-$n$ binary strings and $S \subseteq [0, n-1]$. This sum,
+superficially speaking, measures each string's ``disagreement'' with the other
+shifted back one step minus the number of sector switches. The rules of the
+parallel chip-firing game put a global upper bound on the total disagreement
+between vertices, yet the following theorem says that sector switches require
+disagreement. We show in Section~\ref{nonclumpiness} that this implies that
+firing sequences with sector switches are impossible once a game has become
+periodic.
 
 \begin{thm}\label{morale}
 $M_{[0,n-1]}(p,q) \geq 0$.
 \end{thm}
 
 \begin{proof}
-We can caculate $M_{[0,n-1]}(p,q)$ as $\sum_{i=0}^{n-1}M_{\{i\}}(p,q)$, and
+We can calculate $M_{[0,n-1]}(p,q)$ as $\sum_{i=0}^{n-1}M_{\{i\}}(p,q)$, and
 $M_{\{i\}}(p,q)$ is determined by $p_{i-1}$, $p_i$, $s_i(p)$, $s_{i+1}(p)$, and
 the same data for $q$. The motivation for using $s_{i+1}(p)$ as opposed to
 $s_{i-1}(p)$ in $\delta_i(p)$ is that a switch away from a $b$-sector can occur
@@ -87,7 +80,9 @@ sequence of vertices $(\mu_0(p,q), \dots, \mu_{n-1}(p,q),
 \mu_0(p,q))$. Therefore, it suffices to show that $\G$ has no negative
 cycles. Running the Bellman-Ford algorithm~\cite{bellmanford} on $\G$ shows
 this to be the case. We describe $\G$ and the algorithm in a Python program in
-Appendix~\ref{bfAlg}.
+Appendix~\ref{bfAlg}. The key is that if $i$ and $i+1$ are in $b$- and
+$\ol{b}$-sectors of $p$, respectively, then $p_{i-1} = p_i = b$ and $p_{i+1} =
+\ol{b}$.
 \end{proof}
 
 \section{Nonclumpiness of Periodic Firing Patterns}\label{nonclumpiness}
