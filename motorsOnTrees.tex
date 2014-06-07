@@ -5,14 +5,14 @@ $G$, focusing on a particular subgraph $H \subseteq G$. Consider
 \begin{equation*}
   X = \set{v \in \V \setminus \V[H]}{\N{v} \cap \V[H] \neq \emptyset},
 \end{equation*}
-the set of vertices ``just outside'' of $H$. Knowing the initial chip
-configuration on $\V[H] \cup X$ is in general not enough to determine all
-subsequent configurations because vertices in $X$ may have interactions with
-vertices outside of $\V[H] \cup X$. However, we do know that every vertex
-assumes a pattern of firing and waiting that repeats periodically as soon as a
-game reaches a periodic position. Therefore, we can simulate the presence of
-the rest of $G$ by having each vertex in $X$ fire with a regular pattern
-regardless of the number of chips it receives.
+the boundary of $H$. Knowing the initial chip configuration on $\V[H] \cup X$
+is in general not enough to determine all subsequent configurations because
+vertices in $X$ may have interactions with vertices outside of $\V[H] \cup
+X$. However, we do know that every vertex assumes a pattern of firing and
+waiting that repeats periodically as soon as a game reaches a periodic
+position. Therefore, we can simulate the presence of the rest of $G$ by having
+each vertex in $X$ fire with a regular pattern regardless of the number of
+chips it receives.
 
 The $\emph{firing sequence}$ of a vertex $v$ in game $\s$ is the sequence
 $(\firing{v}{t})_{t \in \nats}$. A \emph{motorized parallel chip-firing game},
@@ -43,84 +43,85 @@ neighbors of the vertex that fires the most times each period must also fire
 that maximal number of times, and by induction, so do all vertices. (Recall
 that we consider in this paper only connected graphs.)
 
-We define
-\[
-  \pat{v}{f} = \set{t \in \nats}{\firing{v}{t} = f}.
-\]
-Call an interval $[a, b]$ with $a < b$ a \emph{max-clump} of $v \in \V$ if and
-only if $[a, b] \subseteq \pat{v}{f}$ and $\firing{v}{a-1} = \firing{v}{b+1} =
-1-f$, where $f \in \{0,1\}$. Given $v \in \V$, we can express $\nats$ as the
-union of max-clumps of $v$ and times during which $v$ alternates between firing
-and waiting.
+Let $f \in \{0,1\}$. Call an interval $[a, b]$ with $a < b$ an \emph{$f$-clump}
+of $v \in \V$ if and only if $\firing{v}{t} = f$ for all $t \in [a, b]$. We
+call $[a, b]$ an \emph{$f$-max-clump} if, in addition, $\firing{v}{a-1} =
+\firing{v}{b+1} = 1-f$. Given $v \in \V$, we can express $\nats$ as the union
+of max-clumps of $v$ and times during which $v$ alternates between firing and
+waiting.
 
 The proof of Theorem~\ref{cheapLunch} follows the same structure as the proof
 that ordinary games on trees have period~1 or~2~\cite{bitarGoles}. In fact, we
 rely on a lemma originally introduced for that proof.
 
 \begin{lem}[{\cite[Lemma 1]{bitarGoles}}] \label{bitarGoles}
-Let $\s$ be a game on $G$. For all $v \in \V$ and $f \in \{0,1\}$, if $[a, b]
-\subseteq \pat{v}{f}$, then there exists $w \in \N{v}$ such that $[a-1, b-1]
-\subseteq \pat{w}{f}$.
+Let $\s$ be a game on $G$. For all $v \in \V$ and $f \in \{0,1\}$, if $[a, b]$
+is an $f$-clump of $v$, then there exists a neighbor $w \in \N{v}$ such that
+$[a-1, b-1]$ is an $f$-clump of $w$.
 \end{lem}
 
-Less technically, every burst of firing or waiting by a vertex must be
+Less technically, every clump of firing or waiting by a vertex must be
 supported by at least one of its neighbors. The lemma follows from the
 pigeonhole principle and Lemma~\ref{strongbg}, which we state and prove later.
 
 \begin{thm} \label{cheapLunch}
-Let $\s$ be a periodic motorized game on tree $T$. For all $v \in \V[T]$ and $f
-\in \{0,1\}$ , if $[a, b] \subseteq \pat{v}{f}$, then $[a-D, b-D] \subseteq
-\pat{m}{f}$ for some $m \in \mots$, where $D$ is the distance from $m$ to $v$.
+Let $\s$ be a periodic motorized game on tree $T$. For all $v \in \V[T]$ and
+$f \in \{0,1\}$ , if $[a, b]$ is an $f$-clump of $v$, then $[a-D, b-D]$ is an
+$f$-clump of $m$ for some $m \in \mots$, where $D$ is the distance from $m$ to
+$v$.
 \end{thm}
 
 \begin{proof}
-The fact that $\s$ is periodic means we need not worry about negative turn
-indices.
+The result is clear if all vertices either always fire or always wait. In all
+other cases, each firing sequence has a max-clump, and the argument is roughly
+as follows. By Lemma~\ref{bitarGoles}, each clump of a vertex must be supported
+by a clump of a neighbor.  Following the ``chain of support'' gives a sequence
+of vertices that either is infinite or ends with a motor. If we consider the
+containing max-clumps of clumps, we can guarantee a sequence with no
+backtracking. Trees have no cycles, so the sequence must end with a motor. The
+details follow.
 
-Let $v_0 = v$ and $[a_0, b_0] \supseteq [a, b]$ be a max-clump of $v_0$. By
-Lemma~\ref{bitarGoles}, given a vertex $v_{i-1} \not\in \mots$ with $[a_{i-1},
-  b_{i-1}] \in \pat{v_{i-1}}{f}$, we can pick a vertex $v_i \in \N{v_{i-1}}$
-and integers $a_i$ and $b_i$ such that $[a_i, b_i]$ is a max-clump of $v_i$ and
-\[
-  [a_{i-1} - 1, b_{i-1} - 1] \subseteq [a_i, b_i] \subseteq \pat{v_i}{f}.
-\]
-If there is a maximum $i$ for which $v_i$ exists, that vertex must be a motor,
-which would mean
-\[
-  [a-D, b-D] \subseteq [a_D, b_D] \subseteq \pat{m}{f},
-\]
+Let $v_0 = v$ and $[a_0, b_0] \supseteq [a, b]$ be an $f$-max-clump of
+$v_0$. By Lemma~\ref{bitarGoles}, given a vertex $v_i \not\in \mots$ with clump
+$[a_i, b_i]$, we can pick a supporting vertex $v_{i+1} \in \N{v_i}$ and
+integers $a_{i+1}$ and $b_{i+1}$ such that $[a_{i+1}, b_{i+1}]$ is an
+$f$-max-clump of $v_i$ and $[a_i - 1, b_i - 1] \subseteq [a_{i+1},
+b_{i+1}]$. (The fact that $\s$ is periodic means we need not worry about
+negative turn numbers.) If there is a maximum $i$ for which $v_i$ exists, that
+vertex must be a motor, which would mean $[a-D, b-D] \subseteq [a_D, b_D]$,
 where $D$ is the maximum $i$ and $m = v_D \in \mots$. Thus, it suffices to show
-that the sequence $\{v_0, v_1, \ldots\}$ eventually terminates. There are
+that the sequence $(v_0, v_1, \ldots)$ eventually terminates. There are
 finitely many vertices in the graph, so it suffices to show that the $v_i$ are
 all distinct.
 
-$T$ has no cycles, so if $v_i \neq v_{i-2}$ for all $i$, then all $v_i$ are
-distinct. Suppose for contradiction that $v_i = v_{i-2}$ for some $i$. Then
-$[a_i, b_i] \cup [a_{i-2}, b_{i-2}] \subseteq \pat{v_i}{f}$. However, $[a_{i-2}
-  - 2, b_{i-2} - 2] \subseteq [a_i, b_i]$, so $[a_{i-2} - 2, b_{i-2}] \subseteq
-\pat{v_i}{f}$. Therefore, $[a_{i-2}, b_{i-2}]$ is not a max-clump, a
-contradiction, so $v_i \neq v_{i-2}$ for all $i$.
+$T$ has no cycles, so if $v_i \neq v_{i+2}$ for all $i$, then all $v_i$ are
+distinct. Suppose for contradiction that $v_i = v_{i+2}$ for some $i$. Then
+$[a_i, b_i] \cup [a_{i+2}, b_{i+2}]$ is a clump of $v_i$. However, $[a_i - 2,
+b_i - 2] \subseteq [a_{i+2}, b_{i+2}]$, so $[a_i - 2, b_i]$ is a clump of
+$v_i$. Therefore, $[a_i, b_i]$ is not a max-clump, a contradiction, so $v_i
+\neq v_{i-2}$ for all $i$.
 \end{proof}
 
 Call a firing sequence \emph{clumpy} if it contains two consecutive 0s and two
 consecutive 1s; otherwise, call it \emph{nonclumpy}.
 
 \begin{cor} \label{freeLunch}
-Let $\s$ be a periodic motorized game on tree $M$ with a single motor $m$. If
-$m$ has a nonclumpy firing sequence but has at least one max-clump, then
+Let $\s$ be a periodic motorized game on tree $T$ with a single motor $m$. If
+$m$ has a nonclumpy firing sequence but has at least one clump, then
 $\firing{v}{t+D} = \firing{m}{t}$ for all $v \in \V[T]$ and $t \in \nats$,
 where $D$ is the distance from $v$ to $m$.
 \end{cor}
 
 \begin{proof}
-Let $v \in \V[T]$. By Theorem~\ref{cheapLunch}, $v$ has a nonclumpy firing
-sequence because $m$ does. All vertices fire the same number of times every
+The result is again clear in the always waiting and always firing cases. In all
+other cases, $m$ has an $f$-max-clump, where $f \in \{0,1\}$. Let $v \in
+\V[T]$. By Theorem~\ref{cheapLunch}, $v$ has a nonclumpy firing sequence
+because $m$ does. All vertices fire the same number of times every
 period~\cite[Proposition~2.5]{jiang}, so $v$ must have at least one max-clump,
-again because $m$ does. For every max-clump $[a, b] \subseteq \pat{v}{f}$,
-$[a-D, b-D] \subseteq \pat{m}{f}$, where $f \in \{0,1\}$. The non-max-clump
-intervals of $v$'s firing sequence are alternations between 0 and 1, starting
-and ending with $1-f$. The same must be true of $m$ for it to fire the same
-number of times each period as $v$.
+again because $m$ does. For every $f$-max-clump $[a, b]$ of $v$, $[a-D, b-D]$
+is an $f$-clump of $m$. The non-max-clump intervals of $v$'s firing sequence
+are alternations between 0 and 1, starting and ending with $1-f$. The same must
+be true of $m$ for it to fire the same number of times as $v$ each period.
 \end{proof}
 
 The reason we require the games in Theorem~\ref{cheapLunch} and
