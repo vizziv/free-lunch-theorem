@@ -1,23 +1,26 @@
 \section{Signed Sums of Binary Sequences}\label{binSeq}
-We take a break from the parallel chip-firing game to consider binary
-strings. We denote the $i$\xth element of a binary string $p$ as $p_i$. For
-simplicity, any integer equivalent to $i \bmod n$ may replace $i$. Throughout
-this section, $b \in \{0,1\}$ and $\ol{b} = 1-b$.
+We take a break from the parallel chip-firing game itself to consider binary
+strings. Throughout this section, $p$ and $q$ are length-$n$ binary strings, $b
+\in \{0,1\}$, and $\ol{b} = 1-b$. We denote the $i$\xth element of a binary
+string $p$ as $p_i$, and any integer equivalent to $i \bmod n$ may replace $i$.
 
-Given a binary string $p$, we say an index $i$ is \emph{in a $b$-region} of $p$
-if either $p_{i-1} = p_i = b$ or $p_{i-1} \neq p_i$ and $p_{i+1}$ is in a
-$b$-sector. A \emph{$b$-sector} of $p$ is a maximal integer interval such that
-all of its member indices are in a $b$-region of $p$. Roughly speaking,
-$b$-sectors have no two $\ol{b}$s in a row and extend as far back as possible.
-See Figure~\ref{sectorEx} for an example. It is easy to see that almost any
-string can be partitioned into 0- and 1-sectors in exactly one way, with
-exceptions only for always-alternating strings (e.g.\ 010101) that can be
-thought of as one 0-sector or one 1-sector.
+A \emph{$b$-region} of $p$ is an integer interval $[x,y]$ such that $p_{y-1} =
+p_y = b$ and either $p_i = b$ or $p_{i+1} = b$ for all $i \in [x,y]$. A
+\emph{$b$-sector} is a $\subseteq$-maximal $b$-region. Informally, $b$-sectors
+end with consecutive $b$s and extend back as far as possible. We have to make
+an exception for always-alternating strings, such as 01010101, that have
+neither 0 nor 1 twice in a row. We arbitrarily define $[0, n-1]$ to be a
+0-sector of them. It is the transitions between 0- and 1-sectors that are
+ultimately important, so this exception is acceptable. It is simple to verify
+that the indices of every binary string have a unique decomposition into 0- and
+1-sectors. An example is shown in Figure~\ref{sectorEx}.
 
 \begin{figure}
   \[
-    \underbracket[1pt]{01000100}\overbracket[1pt]{11011}\underbracket[1pt]{00}
-    \overbracket[1pt]{101011}
+    \aunderbrace[l1r]{01000100}
+    \!\aoverbrace[L1R]{11011}
+    \!\aunderbrace[l1r]{00}
+    \!\aoverbrace[L1R]{101011}
   \]
   \caption{A string's 0-sectors (marked below) and 1-sectors (marked
     above).}
@@ -34,56 +37,111 @@ Let
     0 & \text{if $i$ is in a $b$-sector of $p$ and $i+1$ is in a $b$-sector of
       $p$} \\
     1 & \text{if $i$ is in a $b$-sector of $p$ and $i+1$ is in a
-      $\ol{b}$-sector of $p$}.
-  \end{cases}
+      $\ol{b}$-sector of $p$}
+  \end{cases} \\
+  M_i(p,q) &= s_i(p)(p_i - q_{i-1}) + s_i(q)(q_i - p_{i-1}) - \delta_i(p) -
+  \delta_i(q).
 \end{align*}
-Our main theorem in this section concerns the sum
-\begin{equation}\label{misbsum}
-  M_S(p,q) = \sum_{i \in S}(s_i(p)(p_i - q_{i-1}) + s_i(q)(q_i - p_{i-1}) -
-  \delta_i(p) - \delta_i(q)),
-\end{equation}
-where $p,q$ are length-$n$ binary strings and $S \subseteq [0, n-1]$. This sum,
-superficially speaking, measures each string's ``disagreement'' with the other
-shifted back one step minus the number of sector switches. The rules of the
-parallel chip-firing game put a global upper bound on the total disagreement
-between vertices, yet the following theorem says that sector switches require
-disagreement. We show in Section~\ref{nonclumpiness} that this implies that
-firing sequences with sector switches are impossible once a game has become
-periodic.
+Our main theorem in this section concerns what we refer to as the
+\emph{mischief between $p$ and $q$},
+\[
+  M(p,q) = \sum_{i=0}^{n-1} M_i(p,q),
+\]
+Mischief, superficially speaking, measures three things: how much $p$ differs
+from $q$ delayed one time step, which we call the \emph{misbehavior of $q$
+  towards $p$}; vice versa; and the total number of sector switches. An example
+calculation is shown in Figure~\ref{moraleEx}. The rules of the parallel
+chip-firing game put a global upper bound on the total disagreement between
+vertices, yet the following theorem states that mischief is nonnegative,
+meaning that sector switches require disagreement. We show in
+Section~\ref{nonclumpiness} that this implies that firing sequences with sector
+switches are impossible once a game has become periodic.
+
+% Dash
+\newbracespec{d}{!{0.05em}@{\hspace{0.1em}}!{0.05em}}
+% End
+\newbracespec{e}{!{0.05em}}
+% N dashes: e*{N}{d}e (sometimes with 1 instead of e)
+\begin{figure}
+  \begin{align*}
+    p\colon &\aunderbrace[e*{12}{d}1r]{010001}_4
+    \!\aoverbrace[L1*{8}{d}1R]{00110}^2
+    \!\aunderbrace[l1@{\hspace{0.1em}}1r]{11}_2
+    \!\aoverbrace[L1*{10}{d}1R]{001010}^2
+    \!\aunderbrace[l1*{2}{d}e]{11}
+    & p\colon &\aunderbrace[l1r]{01000100}_2
+    \!\aoverbrace[L1R]{11011}^4
+    \!\aunderbrace[l1r]{00}_0
+    \!\aoverbrace[L1R]{101011}^4 \\
+    q\colon &\aunderbrace[1r]{1000100}_2
+    \!\aoverbrace[L1R]{11011}^4
+    \!\aunderbrace[l1r]{00}_0
+    \!\aoverbrace[L1R]{101011}^4
+    \!\aunderbrace[l1]{0}
+    & q\colon &\aunderbrace[e*{14}{d}1r]{1000100}_2
+    \!\aoverbrace[L1*{8}{d}1R]{11011}^4
+    \!\aunderbrace[l1@{\hspace{0.1em}}1r]{00}_0
+    \!\aoverbrace[L1*{10}{d}1R]{101011}^4
+    \!\aunderbrace[l1]{0}
+  \end{align*}
+  \caption{We calculate the mischief between two strings by dividing each into
+    sectors. The misbehavior of $p$ towards $q$ is $- (2-4) + (4-2) - (0 - 2) +
+    (4 - 2) = 8$, as shown on the left. On the right, we see that the
+    misbehavior of $q$ towards $p$ is 0. Each string has 4 sector switches, so
+    $M(p,q) = 8 + 0 - 4 - 4 = 0$.}
+  \label{moraleEx}
+\end{figure}
 
 \begin{thm}\label{morale}
-$M_{[0,n-1]}(p,q) \geq 0$.
+The mischief between any two binary strings of equal length is nonnegative.
 \end{thm}
 
 \begin{proof}
-We can calculate $M_{[0,n-1]}(p,q)$ as $\sum_{i=0}^{n-1}M_{\{i\}}(p,q)$, and
-$M_{\{i\}}(p,q)$ is determined by $p_{i-1}$, $p_i$, $s_i(p)$, $s_{i+1}(p)$, and
-the same data for $q$. The motivation for using $s_{i+1}(p)$ as opposed to
-$s_{i-1}(p)$ in $\delta_i(p)$ is that a switch away from a $b$-sector can occur
-between $i$ and $i+1$ only if $p_{i-1} = p_i = b$. Let
+Let
 \[
-  \mu_i(p,q) = (p_{i-1},p_i,s_i(p),s_{i+1}(p),q_{i-1},q_i,s_i(q),s_{i+1}(q))
+  \mu_i(p,q) = (p_{i-1},p_i,s_i(p),s_{i+1}(p),q_{i-1},q_i,s_i(q),s_{i+1}(q)),
 \]
-and let $\G$ be a weighted digraph with
+a tuple of all information requied to calculate $M_i(p,q)$, and let $\G$ be a
+weighted digraph with
 \begin{align*}
   \V[\G] &= \set{\mu_i(p,q)}{p,q \text{ strings}, i \in \nats} \\
-  \E[\G] &= \set{(u,v,w)}{\exists p,q,i\colon
-    u = \mu_i(p,q),
-    v = \mu_{i+1}(p,q),
-    w = M_{\{i\}}(p,q)}.
+  \E[\G] &= \set{(\mu_i(p,q),\mu_{i+1}(p,q),M_i(p,q))}{p,q \text{ strings}, i
+    \in \nats}
 \end{align*}
-(The third item of each edge is its weight.) Note that not every possible tuple
-is a vertex. Define the weight of a path to be the sum of the weights of its
-member edges, and call a path negative if it has negative weight. We can
-calculate the $M_{[0,n-1]}(p,q)$ as the weight of a path induced by the
-sequence of vertices $(\mu_0(p,q), \dots, \mu_{n-1}(p,q),
-\mu_0(p,q))$. Therefore, it suffices to show that $\G$ has no negative
-cycles. Running the Bellman-Ford algorithm~\cite{bellmanford} on $\G$ shows
-this to be the case. We describe $\G$ and the algorithm in a Python program in
-Appendix~\ref{bfAlg}. The key is that if $i$ and $i+1$ are in $b$- and
-$\ol{b}$-sectors of $p$, respectively, then $p_{i-1} = p_i = b$ and $p_{i+1} =
-\ol{b}$.
+(The third item of each edge is its weight.) Define the weight of a path to be
+the sum of the weights of its member edges, and call a path negative if it has
+negative weight. We can calculate the mischief $M(p,q)$ as the weight of a path
+in $\G$ induced by the sequence of vertices $(\mu_0(p,q), \dots,
+\mu_{n-1}(p,q), \mu_0(p,q))$. Therefore, it suffices to show that $\G$ has no
+negative cycles---in particular, no negative cycles of length $n$.
+
+We discuss below the constraints that define what tuples can exist as some
+$\mu_i(p,q)$. These constraints yield a graph $\G$ with 64 vertices and 256
+edges, which is impractical to analyze by hand. However, running the
+Bellman-Ford algorithm~\cite{bellmanford} on $\G$ shows it to be free of
+negative cycles. A Python program specifies both the graph and the algorithm in
+detail in Appendix~\ref{bfAlg}.
 \end{proof}
+
+The only constraint on edges of $\G$ is that the state shared by the connected
+vertices be consistent. For example, both $\mu_i(p,q)$ and $\mu_{i+1}(p,q)$
+contain $p_i$. There are two constraints on the vertices of $\G$ enforced by
+the definition of sectors in $p$. Analogous constraints apply for $q$.
+\begin{itemize}
+\item If $p_{i-1} = p_i = b$, then $s_i(p)$ indicates that $i$ is in a
+  $b$-sector of $p$.
+\item If $s_i(p) \neq s_{i+1}(p)$, then $p_{i-1} = p_i = b$ such that $s_i(p)$
+  indicates that $i$ is in a $b$-sector of $p$.
+\end{itemize}
+To get a sense for how these force nonnegative mischief, consider the latter
+constraint. The sector switch reduces mischief, but it also makes $p_{i+1} =
+\ol{b}$. If $q_i = b$, then $q$ misbehaves towards $p$ at $i+1$. If $q_i =
+\ol{b}$ and $i$ is in a $\ol{b}$-sector of $q$, then $p$ misbehaves towards $q$
+at $i$. However, we cannot finish the last case, $q_i = \ol{b}$ with $i$ in a
+$b$-sector of $q$, with similar local reasoning. The former constraint limits
+the frequency with which that last case can happen, but there are many
+scenarios to consider before dispatching the case. Using the Bellman-Ford
+algorithm avoids this further casework.
 
 \section{Nonclumpiness of Periodic Firing Patterns}\label{nonclumpiness}
 We consider parallel chip-firing game $\s$ on undirected graph $G$. The
@@ -101,22 +159,23 @@ periodic\footnote{The reason we introduce PFPs instead of continuing to reason
 the PFP of $v$ as $\pfp{v}$. For simplicity, we assume here that $t_0 = 0$ and
 index PFPs modulo $\period$.
 
-Let $\pfps$ be the set of all PFPs occurring in $\s$. Call a PFP with both
-consecutive 0s and consecutive 1s \emph{clumpy}, and let $\cpfps$ be the set of
-all clumpy PFPs occurring in $\s$. (Recall that the $\period$\xth and 0\xth
-entries of a PFP are the same, so, for example, 011010 is clumpy.) It is known
-that, given almost any\footnote{The given construction requires that the PFP
-  not be decomposable to a repeated substring. Using Theorem~\ref{natMotors},
-  one can expand the construction to any nonclumpy PFP other than those that
-  are 01 or 10 repeated more than once. These PFPs turn out to be impossible,
-  though the corresponding firing sequences are possible in games of period 2.}
-nonclumpy PFP, one can construct a parallel chip-firing game on a simple cycle
-in which every vertex has that PFP shifted by some number of
-steps~\cite{cycle}. We prove here that clumpy PFPs cannot occur in any parallel
-chip-firing game.
+Let $\pfps$ be the set of all PFPs that are compatible with $\s$, which means
+they have the same number of 0s and 1s as a PFP that occurs in $\s$. Call a PFP
+with both consecutive 0s and consecutive 1s \emph{clumpy}, and let $\cpfps$ be
+the set of clumpy PFPs that are compatible with $\s$. (Recall that the
+$\period$\xth and 0\xth entries of a PFP are the same, so, for example, 011010
+is clumpy.) It is known that, given almost any\footnote{The given construction
+  requires that the PFP not be decomposable to a repeated substring. Using
+  Theorem~\ref{natMotors}, one can expand the construction to any nonclumpy PFP
+  other than those that are 01 or 10 repeated more than once. These PFPs turn
+  out to be impossible, though the corresponding firing sequences are possible
+  in games of period 2.}  nonclumpy PFP, one can construct a parallel
+chip-firing game on a simple cycle in which every vertex has that PFP shifted
+by some number of steps~\cite{cycle}. We prove here that clumpy PFPs cannot
+occur in any parallel chip-firing game.
 
 \begin{lem}\label{strongbg}
-For all $v \in \V$ and $a, b \in \nats$,
+In a periodic game on $G$, for all $v \in \V$ and $a, b \in \nats$,
 \begin{equation}\label{local}
   -\deg{v} + 1 \leq \sum_{t=a}^{b}(\receiving{v}{t-1} - \deg{v}\firing{v}{t})
   \leq \deg{v}-1.
@@ -124,17 +183,21 @@ For all $v \in \V$ and $a, b \in \nats$,
 \end{lem}
 
 \begin{proof}
-We express $\chips{v}{b}$ in terms of $\chips{v}{a-1}$.
+We express $\chips{v}{b}$ in terms of $\chips{v}{a-1}$:
 \begin{align*}
   \chips{v}{b} &= \chips{v}{a-1} +
   \smashoperator{\sum_{t=a-1}}^{b-1}(\receiving{v}{t} - \deg{v}\firing{v}{t})
   \\
   \chips{v}{b} - \deg{v}\firing{v}{b} &= \chips{v}{a-1} -
   \deg{v}\firing{v}{a-1} + \sum_{t=a}^{b}(\receiving{v}{t-1} -
-  \deg{v}\firing{v}{t})
+  \deg{v}\firing{v}{t}).
 \end{align*}
-Recall that $0 \leq \chips{v}{t} - \deg{v}\firing{v}{t} \leq \deg{v} - 1$ for
-all $t \in \nats$ such that $\pos{t}$ is periodic, which gives the desired
+As mentioned in \cite[Section 2]{kominers}, the set of vertices $v$ such that
+$\chips{v}{t} \geq 2\deg{v}$ chips is nonincreasing as $t$ increases. In
+particular, in a periodic game, this set is empty unless the game has period 1,
+in which case the lemma is clear. Otherwise, simple analysis of the waiting and
+firing cases shows that $\chips{v}{t} \leq 2\deg{v} - 1$ implies $0 \leq
+\chips{v}{t} - \deg{v}\firing{v}{t} \leq \deg{v} - 1$, which gives the desired
 inequality.
 \end{proof}
 
@@ -144,19 +207,24 @@ We define
 \pfpedges{p}{q} &= {\set{\{v,w\} \in \E}{\pfp{v}=p, \pfp{w} = q}} \\
 \misb{S}{p}{q} &= \sum_{i \in S}(p_{i} - q_{i-1})
 \end{align*}
-for binary strings $p$ and $q$. We now prove our main result: clumpy PFPs do
-not occur in the parallel chip-firing game.
+for binary strings $p$ and $q$ and sets of indices $S \subseteq \nats$. Note
+that $\misb{S}{p}{q}$ is very closely related to the misbehavior of $q$ towards
+$p$, missing only sector-dependent signs. We now have the tools to prove our
+main result.
 
 \begin{thm}\label{nct}
-$\size{\pfpverts{p}} = 0$ for all $p \in \cpfps$.
+Clumpy PFPs do not occur in the parallel chip-firing game.
 \end{thm}
 
 \begin{proof}
-Roughly, summing an inequality given by Lemma~\ref{strongbg} over all vertices
-with clumpy PFPs bounds a quantity below, and summing an inequality given by
+The key is to examine the mischief between all pairs of neighbor vertices in
+which at least one neighbor has a clumpy PFP. Roughly speaking, summing an
+inequality derived from Lemma~\ref{strongbg} over all vertices with clumpy PFPs
+bounds a negative sum of mischiefs below, and summing the inequality given by
 the Theorem~\ref{morale} over all edges incident with a vertex with a clumpy
-PFP gives an upper bound on the same quantity. The lower bound is the total
-number of vertices with clumpy PFPs, and the upper bound is 0.
+PFP gives an upper bound on the same sum of mischiefs. The lower bound relates
+positively with the number of vertices with clumpy PFPs, and the upper bound is
+0.
 
 Let $a,b \in \nats$ and $v \in \V$. Grouping the sum in \eqref{local} by $v$'s
 neighbors instead of time steps yields
@@ -164,90 +232,114 @@ neighbors instead of time steps yields
   -\deg{v} + 1 \leq -\smashoperator{\sum_{w \in
       \N{v}}}\misb{[a,b]}{\pfp{v}}{\pfp{w}} \leq \deg{v} - 1.
 \]
-Regrouping gives us
+Reordering the inequality on the left, recalling that $\deg{v} = \size{\N{v}}$,
+gives
 \[
-  1 \leq \smashoperator{\sum_{w \in \N{v}}}(1 +
-  r\misb{[a,b]}{\pfp{v}}{\pfp{w}}),
+  1 \leq \smashoperator{\sum_{w \in \N{v}}}(1 - \misb{[a,b]}{\pfp{v}}{\pfp{w}}),
 \]
-where $r = \pm1$. Let $p \in \pfps$. The above summed over $v \in \pfpverts{p}$
-is
+and by considering the right inequality we obtain the same result with the $-$
+switched to $+$. Let $p$ be a PFP. By summing the above over $v \in
+\pfpverts{p}$ for some choice of signs, we obtain
 \[
   \size{\pfpverts{p}} \leq \smashoperator{\sum_{\substack{v \in \pfpverts{p}
-        \\\ w \in \N{v}}}}(1 + r_v\misb{[a,b]}{p}{\pfp{w}}),
+        \\ w \in \N{v}}}}(1 + r_v\misb{[a,b]}{p}{\pfp{w}}),
 \]
-where each $r_v = \pm1$ can depend on $v$. (Notation: ranges for outer sums are
-above ranges for inner sums.)
+where each $r_v = \pm1$ may be chosen dependent on $v$. (Notation: domains for
+outer sums are above domains for inner sums.) That each
+$\misb{[a,b]}{p}{\pfp{w}}$ term is preceded by a sign of our choice is a sign
+that we can relate this quantity to misbehavior.
 
-For all $p \in \pfps$, let $\sctr{p}$ be the set of sectors of $p$. Abusing
-notation slightly, we may write $s_X(p)$ instead of $s_i(p)$ if $i \in X \in
-\sctr{p}$. Because each $X \in \sctr{p}$ is of the form $[a,b]$ for some $a,b
-\in \nats$, we can sum the above inequality over $X \in \sctr{p}$ and $p \in
-\cpfps$ to get
+For all PFPs $p$, let $\sctr{p}$ be the set of sectors of $p$. Because each
+sector of a PFP is of the form $[a,b]$ for some $a,b \in \nats$, we can sum the
+above inequality over $X \in \sctr{p}$ and $p \in \cpfps$ to get
 \begin{equation}\label{almost}
-  \smashoperator[r]{\sum_{p \in \cpfps}}\size{\pfpverts{p}} \leq
+  \smashoperator[r]{\sum_{\substack{
+        p \in \cpfps \\
+        X \in \sctr{p}
+  }}}\size{\pfpverts{p}} \leq
   \smashoperator{\sum_{\substack{
         p \in \cpfps \\ v \in \pfpverts{p} \\
         w \in \N{v} \\ X \in \sctr{p}
   }}}(1 + r_{v,X}\misb{X}{p}{\pfp{w}}),
 \end{equation}
-where each $r_{v,X} = \pm1$ can depend on $v$ and $X$.
+where each $r_{v,X} = \pm1$ may be chosen dependent on $v$ and $X$.
 
-Let $p \in \cpfps$ and $q \in \pfps$. If $q$ is clumpy, then
-\[
-  M_{[0,\period-1]}(p,q) =
+Let $p$ be a clumpy PFP. If $q$ is a clumpy PFP, then
+\begin{equation}\label{misbSub1}
+  M(p,q) =
   \smashoperator{\sum_{X \in \sctr{p}}}(s_X(p)\misb{X}{p}{q} - 1) +
   \smashoperator{\sum_{X \in \sctr{q}}}(s_X(q)\misb{X}{q}{p} - 1).
-\]
-The $-1$ in each sum accounts for the $-\delta_i(p)-\delta_i(q)$ term in
-\eqref{morale}, the definition of $M$. If instead $q$ is not clumpy, then
-$\sctr{q} = \{[0,\period-1]\}$, so
-\[
-  M_{[0,\period-1]}(p,q) =
+\end{equation}
+(Abusing notation slightly, we write $s_X(p)$ instead of $s_i(p)$ if $i \in X
+\in \sctr{p}$.) The $-1$ in each sum accounts for the
+$-\delta_i(p)-\delta_i(q)$ term in \eqref{morale}, the definition of
+mischief. If instead $q$ is not clumpy, then $\sctr{q} = \{[0,\period-1]\}$, so
+$q$ has no sector switches and
+\begin{equation}\label{misbSub2}
+  M(p,q) =
   \smashoperator{\sum_{X \in \sctr{p}}}(s_X(p)\misb{X}{p}{q} - 1) +
   s_{[0,\period-1]}(q)\misb{[0,\period-1]}{q}{p}.
-\]
+\end{equation}
 However, $\misb{[0,\period-1]}{q}{p} = 0$ because $p$ and $q$ have the same
-length and number of 1s.
+length and number of 1s. This means that the mischief between $p$ and $q$ only
+depends on the misbehavior of $q$ towards $p$ and sector switches in $p$. This
+is important because Lemma~\ref{strongbg} bounds total misbehavior towards a
+vertex from all neighbors.
 
 Let $W = \set{v \in \V}{\pfp{v} \in \cpfps}$ be the set of vertices with clumpy
-PFPs. Choosing $r_{v,X} = -s_X(\pfp{v})$ and splitting the sum in
-\eqref{almost} between neighbors with and without clumpy PFPs yields
+PFPs. Choosing $r_{v,X} = -s_X(p)$ in \eqref{almost} yields
 \begin{align*}
   \smashoperator[r]{\sum_{\substack{
         p \in \cpfps \\
         X \in \sctr{p}
-  }}}\size{\pfpverts{p}} &\leq
+      }}}\size{\pfpverts{p}}
+  &\leq
+  \smashoperator{\sum_{\substack{
+        p \in \cpfps \\ v \in \pfpverts{p} \\
+        w \in \N{v} \\ X \in \sctr{p}
+      }}}(1-s_X(p)\misb{X}{p}{\pfp{w}}) \\
+  &=
   \smashoperator{\sum_{\substack{
         p \in \cpfps \\ v \in \pfpverts{p} \\
         w \in \N{v} \cap W \\ X \in \sctr{p}
-  }}}(1-s_X(p)\misb{X}{p}{\pfp{w}}) +
+      }}}(1-s_X(p)\misb{X}{p}{\pfp{w}}) +
   \smashoperator{\sum_{\substack{
         p \in \cpfps \\ v \in \pfpverts{p} \\
         w \in \N{v} \setminus W \\ X \in \sctr{p}
-  }}}(1-s_X(p)\misb{X}{p}{\pfp{w}}) \\
+      }}}(1-s_X(p)\misb{X}{p}{\pfp{w}}) \\
   &=
   \smashoperator[l]{\sum_{\substack{
         p,q \in \cpfps \\
         e \in \pfpedges{p}{q}
-  }}}\!\!\Bigg(\smashoperator[r]{\sum_{X \in \sctr{p}}}(1-s_X(p)\misb{X}{p}{q})
+      }}}\!\!
+  \Bigg(\smashoperator[r]{\sum_{X \in \sctr{p}}}(1-s_X(p)\misb{X}{p}{q})
   + \smashoperator{\sum_{X \in \sctr{q}}}(1-s_X(p)\misb{X}{q}{p})\Bigg)
   \\ &\qquad +
   \smashoperator{\sum_{\substack{
         p \in \cpfps \\ v \in \pfpverts{p} \\
         w \in \N{v} \setminus W \\ X \in \sctr{p}
-  }}}(1-s_X(p)\misb{X}{p}{\pfp{w}}) \\
-  &= -\smashoperator{\sum_{\substack{
+      }}}(1-s_X(p)\misb{X}{p}{\pfp{w}}). \\
+\end{align*}
+Note that we consider $p$ and $q$ in the sum over $p,q \in \cpfps$ to be
+unordered. (One alternative notation is a sum over $\{p,q\} \subseteq \cpfps$.)
+We now substitute using \eqref{misbSub1} and \eqref{misbSub2} and apply
+Theorem~\ref{morale} to get
+\[
+  \smashoperator[r]{\sum_{\substack{
+        p \in \cpfps \\
+        X \in \sctr{p}
+      }}}\size{\pfpverts{p}}
+  \leq
+  -\smashoperator{\sum_{\substack{
         p,q \in \cpfps \\
         e \in \pfpedges{p}{q}
-  }}}M_{[0,\period-1]}(p,q) -
+      }}}M(p,q) -
   \smashoperator{\sum_{\substack{
         p \in \cpfps \\
-        v \in \pfpverts{p} \\ w \in \N{v} \setminus
-        W}}}M_{[0,\period-1]}(p,F(w)) \\
-  &\leq 0.
-\end{align*}
-The last line follows from Theorem~\ref{morale}, and when we sum over $p,q \in
-\cpfps$, we consider $p$ and $q$ unordered. (A sum over $\{p,q\} \subseteq
-\cpfps$ is one alternative notation.) Sets have nonnegative sizes, so
-$\size{\pfpverts{p}} = 0$ for all $p \in \cpfps$.
+        v \in \pfpverts{p} \\ w \in \N{v} \setminus W
+      }}}M(p,F(w))
+  \leq 0.
+\]
+Sets have nonnegative sizes, so $\size{\pfpverts{p}} = 0$ for all $p \in
+\cpfps$.
 \end{proof}

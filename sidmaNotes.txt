@@ -1,7 +1,7 @@
 *** Reviewer 1. ***
 
 Section 3, definition of X: isn't that simply called 'outer boundary'?
-=> We now refer to it as the 'boundary'.
+=> We now refer to it as the 'boundary' but keep the formal definition in place to avoid ambiguity.
 
 The terms 'clump' and 'burst' are used with the same meaning; I suggest to add the definition of a 'clump', as an interval in a max-clump, at the bottom of page 4.
 => We have added this definition of clump and used the term to clarify the section, getting rid of the R_f(v) notation entirely. For instance, instead of saying [a,b] \subseteq R_f(v), we say that [a,b] is an f-clump of v.
@@ -25,31 +25,40 @@ page 8, line 10: change v into u, in accordance with the theorem statement.
 => Changed.
 
 page 8, line 12-17: Why make this brief remark outside the proof? I suggest to put it inside instead, so that the theorem can be stated more generally.
-=> We have removed the remark and slightly generalized the theorem.
+=> We have removed the remark and in its place slightly generalized the theorem.
 
 Section 5: The terms 'string' and 'sequence' are used with no clear distinction. If they are the same, then use only one, otherwise, explain the difference.
-=> Other than in the section's title, which we believe is clearer to someone who doesn't have knowlegde of the section's contents, we now use 'string' exclusively, using 'sequence' only in the phrase 'firing sequence', which has a well-defined different meaning, and in unrelated contexts such as 'sequence of vertices'.
+=> Other than in the section's title, which we believe is clearer to someone who doesn't have knowlegde of the section's contents with 'sequence', we now use 'string' exclusively, using 'sequence' only in the phrase 'firing sequence', which has a well-defined different meaning, and in unrelated contexts such as 'sequence of vertices'.
 
 page 8, line -16: 'For simplicity... ' This is a very unclear phrasing. The n-periodicity is not merely simple, it is essential for the proof to work.
 => We have removed 'for simplicity'.
 
 formula (5.1): introducing S is not necessary, in the remainder only S = [0,n-1] is used. I am not even sure if the proof is valid for other S.
+=> This was only used for S = [0,n-1] and S = {i}, so we use the notations M(p,q) and M_i(p,q) for those cases.
 
 page 9, line -13: 'Note that not every tuple is a vertex'; an example would be helpful here.
+=> [[[TODO]]]: We have included much more discussion of the graph in this proof, including such an example.
 
 page 9, line -9: ' ...has no negative cycles'; add 'in particular, no negative cycles of length n' for clarity.
+=> Added.
 
 page 11, line 3: replace ' ...can depend on v' by ' ...may be chosen dependent on v'. Similar in line 10.
+=> Changed.
 
 page 11, line 5: 'Abusing notation slightly... '; move this line below (6.2) because this notation is not used yet in (6.2).
+=> We moved this note to right after the slightly abusednotation is first used.
 
 formula (6.2): in the left sum, the summing over X is missing.
+=> Fixed.
 
 page 11, line -7: 'Choosing ...': replace F(v) by p.
+=> Fixed.
 
 Corollary 7.1: I suggest to replace 'reaches a periodic position' by 'is periodic'.
+=> Changed.
 
 Corollary 7.2: This statement is incorrect. I suspect that the authors mean to define A for some a in N, and then take the union over all a of I(A), and similar for B. And then at least one of the unions is empty, because they can also both be empty.
+=> We have restated this to use just words and made it clearer that both interiors could be empty. The suggested change is correct, was indeed closer to the intended statement, and is actually stronger than the original statement, and so the new version is essentially a notation-free version of it.
 
 Corollary 7.3: 'T >= 3': according to the author's notation T should be T^sigma, but I suggest 'period at least 3'.
 => Changed to 'period at least 3'.
@@ -58,19 +67,28 @@ Corollary 7.3: 'T >= 3': according to the author's notation T should be T^sigma,
 *** Reviewer 2 ***
 
 Theorem 6.2's characterization of Periodic Firing Patterns (PFP) has interesting implications as discussed in Section 7. Unfortunately, the theorem is written in a cryptic way. The authors should find a better way of stating it, hopefully partly in words rather than just a formula whose parsing requires to recursively figure out the meaning of the notation introduced so far. Also, the proof of Theorem 6.2 is a bit dry, I encourage the authors to provide (in words) motivation/intuition/interpretation for the formulas derived and the notation introduced.
+=> We have introduced word names to refer to some of the concepts that were previously only referred to in symbols and added some commentary to the proof.
 
 Theorem 5.1: It is not good style to begin a phrase with a math expression, neither to have a theorem be just a formula. Also, terms should be properly quantified. Furthermore, theorem statements should be as self-contained as possible, its annoying to read a statement and have to go and search for the definition of the terms it involves. Please improve this aspect of the presentation (in the statement of this result and elsewhere).
+=> The names discussed above helped improve the statement of 5.1, and we've made several other result statements less context-dependent. See, for example, Corollary 7.4.
 
 At the end of Section 5 (page 9), the authors state that G has no negative cycles by running the Bellman Ford (BF) algorithm. Can the authors give a formal proof (hopefully more insightful) for this statement (one that does not rely on running BF)? In any case, at least you should include a discussion regarding the size of the graph on which BF needs to be executed.
+=> We have added a comment on the size of the graph and a discussion on how the definition of sectors leads to nonnegative contributions locally in some but not all cases, giving a sense of both why the graph has no negative cycles and why a graph search is a good way to dispatch what would otherwise be messy casework when reasoning about the sequences globally. We do have a sketch of a proof that takes a fully manual casework approach, but it is substantially messier and provides not much additional insight.
 
 p 10, l 13: The authors write "Recall that 0 \leq \delta_t(v) − d(v)F_t(v) \leq d(v)-1...", where was this result stated? Is it obvious? Please elaborate.
+=> We have given a quick justification. This comment led to our catching another small error; the lemma now specifies that the result applies only to periodic games.
 
 Section 6: The main result is to prove that clumpy PFPs do not occur in the parallel chip-firing game. I understand that this statement means that the set Q is empty, correct? However, the authors write "for all p \in Q", but in fact Q is empty! Please clarify.
+=> We have modified the definitions of P and Q to make this clearer. They now refer to all PFPs that might be in the game (that is, have the correct numbers of 0s and 1s).
 
 p10, l18: You should say that S is a set of indexes.
+=> Added.
 
 p10, l-3: the equation needs some more detailed explanation.
+=> Instead of immediately introducing r = \pm 1, we initially state only the r = -1 case, which follows easily from the left hand inequality.
 
 p11, l-3: Shouldn't it be "s_X(q)m_X(q,p)" instead of "s_X(p)m_X(q,p)"?
+=> Fixed.
 
 p11, displayed equations at the bottom: Please provide justification for at least the first inequality and the last identity.
+=> We have added an extra line that makes the first inequality clear and a comment with a reference to the substitution that justifies the last identity.

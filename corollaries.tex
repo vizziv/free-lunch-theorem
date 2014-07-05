@@ -13,38 +13,34 @@ same periodic game because each vertex fires the same number of times each
 period.
 
 \begin{cor}
-Once a parallel chip-firing game reaches a periodic position, either no vertex
-fires twice in a row or no vertex waits twice in a row.
+Once a parallel chip-firing game is periodic, either no vertex fires twice in a
+row or no vertex waits twice in a row.
 \end{cor}
 
 That is, in periodic games, a firing sequence is possible if and only if it is
 nonclumpy.
 
-Let the \emph{interior} of a set of vertices $W$ be $I(W) = \set{v \in W}{N(v)
-  \subseteq W}$. Because a waiting (or firing) vertex with only waiting (or
-firing) neighbors will wait (or fire) the following turn as well, the above
-observation proves the following conjecture of Fey and
-Levine~\cite{privateComms}.
+The \emph{interior} of a set of vertices $W$ is $\set{v \in W}{N(v) \subseteq
+  W}$. Because a waiting (or firing) vertex with only waiting (or firing)
+neighbors will wait (or fire) the following turn as well, the above observation
+proves the following conjecture of Fey and Levine~\cite{privateComms}.
 
 \begin{cor}\label{feyLevine}
-Let $\sigma$ be a periodic game on $G$,
-\begin{align*}
-  A &= \set{v \in \V}{\firing{v}{a} = 0} \\
-  B &= \set{v \in \V}{\firing{v}{b} = 1},
-\end{align*}
-where $a,b \in \nats$. Then either $I(A)$ or $I(B)$ is empty.
+Once a parallel chip-firing game is periodic, the interior of the set of
+waiting vertices is always empty, the interior of set of firing vertices is
+always empty, or both interiors are always empty.
 \end{cor}
 
 Interestingly, Corollary~\ref{feyLevine} also implies Theorem~\ref{nct}. If
 clumpy PFPs were possible, then a leaf attached to a motor with a clumpy PFP
-would be in $I(A)$ and $I(B)$ for appropriately chosen $a,b \in \nats$.
+would be at different times in both the waiting and firing interiors.
 
 In one of the first papers on the parallel chip-firing game, Bitar and Goles
 characterized parallel chip-firing games on trees in~\cite{bitarGoles}.
 Corollary~\ref{freeLunch} and Theorem~\ref{nct} allow us to characterize the
-behavior on tree-like subgraphs---subgraphs such that, if an edge to a root
-vertex is cut, become a tree separated from the rest of the graph---by making
-the root vertex a motor.
+behavior on tree-like subgraphs---subgraphs that, if an edge to a root vertex
+is cut, become a tree separated from the rest of the graph---by making the root
+vertex a motor.
 
 \begin{cor}
 Let $\s$ be a periodic game on $G$ with period at least 3 in which no vertex
@@ -67,23 +63,19 @@ completely remove tree-like subgraphs without affecting the PFPs of the other
 vertices.
 
 \begin{cor}
-Let $\s$ be a periodic game on $G$ and $l \in \V$ be a leaf with $\N{l} =
-\{m\}$. Suppose that no vertex fires twice in a row. Let $G'$ be the subgraph
-of $G$ induced by $\V \setminus \{l\}$. Define $\s'$ on $G'$ such that
-$\chips[\s']{v}{0} = \chips{v}{0}$ for all $v \in \V \setminus \{m\}$. Then
-\[
-  \chips[\s']{m}{0} = \begin{cases}
-    \chips{m}{0} &\textnormal{if }\showhere{\firing{l}{0}} = 1 \\
-    \chips{m}{0} - 1 &\textnormal{otherwise}.
-  \end{cases}
-\]
-An analogous result holds if no vertex waits twice in a row.
+Let $\s$ be a periodic game on $G$, leaf $l \in \V$ have single neighbor $m$,
+and $G'$ be $G$ with $l$ deleted. Then a game $\s'$ exists on $G'$ with the
+same firing behavior as $\s$.
 \end{cor}
 
-Compared to $\s'$, vertex $m$ has to have an extra chip to fire in $\s$.
-However, unless $m$ fired the previous turn---which, because $l$ is a leaf, is
-equivalent to saying $l$ is firing this turn---$m$ will have received the extra
-chip back from $l$, so removing both $l$ and the chip has no effect on $m$ as
-long as $m$ does not fire while $l$ has a chip. This corollary concerns a leaf,
-though the result generalizes to all tree-like subgraphs by repeated
-application, providing an alternate proof of Corollary~\ref{freeLunch}.
+The starting position $\pos[\s']{0}$ can agree with $\pos{0}$ completely except
+for possibly removing a chip from $m$. We consider the case where no vertex
+fires twice in a row. Compared to $\s'$, vertex $m$ has to have an extra chip
+to fire in $\s$.  However, unless $m$ fired the previous turn---which, because
+$l$ is a leaf, is equivalent to saying $l$ is firing this turn---$m$ will have
+received the extra chip back from $l$, so removing both $l$ and the chip has no
+effect on $m$ as long as $m$ does not fire while $l$ has a chip, which doesn't
+happen due to nonclumpiness. The other case is analagous. This corollary
+concerns a leaf, though the result generalizes to all tree-like subgraphs by
+repeated application, providing an alternate proof of
+Corollary~\ref{freeLunch}.
