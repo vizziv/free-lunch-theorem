@@ -28,7 +28,7 @@ page 8, line 12-17: Why make this brief remark outside the proof? I suggest to p
 => We have removed the remark and in its place slightly generalized the theorem.
 
 Section 5: The terms 'string' and 'sequence' are used with no clear distinction. If they are the same, then use only one, otherwise, explain the difference.
-=> Other than in the section's title, which we believe is clearer to someone who doesn't have knowlegde of the section's contents with 'sequence', we now use 'string' exclusively, using 'sequence' only in the phrase 'firing sequence', which has a well-defined different meaning, and in unrelated contexts such as 'sequence of vertices'.
+=> Other than in the section's title, which we believe is clearer to someone who doesn't have knowledge of the section's contents with 'sequence', we now use 'string' exclusively, using 'sequence' only in the phrase 'firing sequence', which has a well-defined different meaning, and in unrelated contexts such as 'sequence of vertices'.
 
 page 8, line -16: 'For simplicity... ' This is a very unclear phrasing. The n-periodicity is not merely simple, it is essential for the proof to work.
 => We have removed 'for simplicity'.
@@ -46,7 +46,7 @@ page 11, line 3: replace ' ...can depend on v' by ' ...may be chosen dependent o
 => Changed.
 
 page 11, line 5: 'Abusing notation slightly... '; move this line below (6.2) because this notation is not used yet in (6.2).
-=> We moved this note to right after the slightly abusednotation is first used.
+=> We moved this note to right after the slightly abused notation is first used.
 
 formula (6.2): in the left sum, the summing over X is missing.
 => Fixed.

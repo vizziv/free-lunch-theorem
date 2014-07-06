@@ -1,21 +1,23 @@
 \section{Signed Sums of Binary Sequences}\label{binSeq}
-We take a break from the parallel chip-firing game itself to consider binary
-strings. Throughout this section, $p$ and $q$ are length-$n$ binary strings, $b
-\in \{0,1\}$, and $\ol{b} = 1-b$. We denote the $i$\xth element of a binary
-string $p$ as $p_i$, and any integer equivalent to $i \bmod n$ may replace $i$.
+We take a brief break from the parallel chip-firing game itself to consider
+binary strings.  Throughout this section, $p$ and $q$ are length-$n$ binary
+strings, $b \in \{0,1\}$, and $\ol{b} = 1-b$. We denote the $i$\xth element of
+a binary string $p$ as $p_i$, and any integer equivalent to $i \bmod n$ may
+replace $i$.
 
-A \emph{$b$-region} of $p$ is an integer interval $[x,y]$ such that $p_{y-1} =
-p_y = b$ and either $p_i = b$ or $p_{i+1} = b$ for all $i \in [x,y]$. A
-\emph{$b$-sector} is a $\subseteq$-maximal $b$-region. Informally, $b$-sectors
-end with consecutive $b$s and extend back as far as possible. We have to make
-an exception for always-alternating strings, such as 01010101, that have
-neither 0 nor 1 twice in a row. We arbitrarily define $[0, n-1]$ to be a
-0-sector of them. It is the transitions between 0- and 1-sectors that are
-ultimately important, so this exception is acceptable. It is simple to verify
-that the indices of every binary string have a unique decomposition into 0- and
+The following definition formalizes the notion of part of a string being
+``mostly'' 0s or 1s. A \emph{$b$-sector} of $p$ is a $\subseteq$-maximal
+integer interval $[x,y]$ such that $p_{y-1} = p_y = b$ and either $p_i = b$ or
+$p_{i+1} = b$ for all $i \in [x,y]$. Informally, $b$-sectors end with
+consecutive $b$s and extend back as far as possible. We have to make an
+exception for always-alternating strings, such as 01010101, that have neither 0
+nor 1 twice in a row. We arbitrarily define $[0, n-1]$ to be a 0-sector of
+them. It is the transitions between 0- and 1-sectors that are ultimately
+important, so this exception is acceptable. It is simple to verify that the
+indices of every binary string have a unique decomposition into 0- and
 1-sectors. An example is shown in Figure~\ref{sectorEx}.
 
-\begin{figure}
+\begin{figure}[tbh]
   \[
     \aunderbrace[l1r]{01000100}
     \!\aoverbrace[L1R]{11011}
@@ -62,7 +64,7 @@ switches are impossible once a game has become periodic.
 % End
 \newbracespec{e}{!{0.05em}}
 % N dashes: e*{N}{d}e (sometimes with 1 instead of e)
-\begin{figure}
+\begin{figure}[tbh]
   \begin{align*}
     p\colon &\aunderbrace[e*{12}{d}1r]{010001}_4
     \!\aoverbrace[L1*{8}{d}1R]{00110}^2
@@ -101,7 +103,7 @@ Let
 \[
   \mu_i(p,q) = (p_{i-1},p_i,s_i(p),s_{i+1}(p),q_{i-1},q_i,s_i(q),s_{i+1}(q)),
 \]
-a tuple of all information requied to calculate $M_i(p,q)$, and let $\G$ be a
+a tuple of all information required to calculate $M_i(p,q)$, and let $\G$ be a
 weighted digraph with
 \begin{align*}
   \V[\G] &= \set{\mu_i(p,q)}{p,q \text{ strings}, i \in \nats} \\
@@ -120,7 +122,7 @@ $\mu_i(p,q)$. These constraints yield a graph $\G$ with 64 vertices and 256
 edges, which is impractical to analyze by hand. However, running the
 Bellman-Ford algorithm~\cite{bellmanford} on $\G$ shows it to be free of
 negative cycles. A Python program specifies both the graph and the algorithm in
-detail in Appendix~\ref{bfAlg}.
+detail in the appendix.
 \end{proof}
 
 The only constraint on edges of $\G$ is that the state shared by the connected
@@ -246,7 +248,7 @@ switched to $+$. Let $p$ be a PFP. By summing the above over $v \in
 \]
 where each $r_v = \pm1$ may be chosen dependent on $v$. (Notation: domains for
 outer sums are above domains for inner sums.) That each
-$\misb{[a,b]}{p}{\pfp{w}}$ term is preceded by a sign of our choice is a sign
+$\misb{[a,b]}{p}{\pfp{w}}$ term is preceded by a sign of our choice is a hint
 that we can relate this quantity to misbehavior.
 
 For all PFPs $p$, let $\sctr{p}$ be the set of sectors of $p$. Because each
@@ -272,9 +274,8 @@ Let $p$ be a clumpy PFP. If $q$ is a clumpy PFP, then
 \end{equation}
 (Abusing notation slightly, we write $s_X(p)$ instead of $s_i(p)$ if $i \in X
 \in \sctr{p}$.) The $-1$ in each sum accounts for the
-$-\delta_i(p)-\delta_i(q)$ term in \eqref{morale}, the definition of
-mischief. If instead $q$ is not clumpy, then $\sctr{q} = \{[0,\period-1]\}$, so
-$q$ has no sector switches and
+$-\delta_i(p)-\delta_i(q)$ term in $M_i(p,q)$. If instead $q$ is not clumpy,
+then $\sctr{q} = \{[0,\period-1]\}$, so $q$ has no sector switches and
 \begin{equation}\label{misbSub2}
   M(p,q) =
   \smashoperator{\sum_{X \in \sctr{p}}}(s_X(p)\misb{X}{p}{q} - 1) +

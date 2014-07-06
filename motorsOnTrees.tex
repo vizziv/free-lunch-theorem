@@ -66,7 +66,7 @@ pigeonhole principle and Lemma~\ref{strongbg}, which we state and prove later.
 
 \begin{thm} \label{cheapLunch}
 Let $\s$ be a periodic motorized game on tree $T$. For all $v \in \V[T]$ and
-$f \in \{0,1\}$ , if $[a, b]$ is an $f$-clump of $v$, then $[a-D, b-D]$ is an
+$f \in \{0,1\}$, if $[a, b]$ is an $f$-clump of $v$, then $[a-D, b-D]$ is an
 $f$-clump of $m$ for some $m \in \mots$, where $D$ is the distance from $m$ to
 $v$.
 \end{thm}
@@ -95,11 +95,10 @@ finitely many vertices in the graph, so it suffices to show that the $v_i$ are
 all distinct.
 
 $T$ has no cycles, so if $v_i \neq v_{i+2}$ for all $i$, then all $v_i$ are
-distinct. Suppose for contradiction that $v_i = v_{i+2}$ for some $i$. Then
-$[a_i, b_i] \cup [a_{i+2}, b_{i+2}]$ is a clump of $v_i$. However, $[a_i - 2,
-b_i - 2] \subseteq [a_{i+2}, b_{i+2}]$, so $[a_i - 2, b_i]$ is a clump of
-$v_i$. Therefore, $[a_i, b_i]$ is not a max-clump, a contradiction, so $v_i
-\neq v_{i-2}$ for all $i$.
+distinct. Suppose that $v_i = v_{i+2}$ for some $i$. Then $[a_i, b_i] \cup
+[a_{i+2}, b_{i+2}]$ would be a clump of $v_i$. However, $[a_i - 2, b_i - 2]
+\subseteq [a_{i+2}, b_{i+2}]$, making $[a_i - 2, b_i]$ a clump of $v_i$. But
+$[a_i, b_i]$ is a max-clump for all $i$, so $v_i \neq v_{i-2}$ for all $i$.
 \end{proof}
 
 Call a firing sequence \emph{clumpy} if it contains two consecutive 0s and two

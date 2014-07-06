@@ -1,10 +1,8 @@
-\documentclass[11pt]{amsart}
+\documentclass[10pt]{siamltex}
 \pdfoutput=1
-\usepackage{amsmath, amssymb, amsthm, graphicx, subfig, mathrsfs, calc, xspace,
+\usepackage{amsmath, amssymb, graphicx, subfig, mathrsfs, calc, xspace,
   mathtools, ifthen, booktabs, longtable, comment, setspace, verbatim,
   placeins, abraces}
-\usepackage[colorlinks=true]{hyperref}
-\hypersetup{urlcolor=blue, citecolor=red}
 \newlength{\figWidthA}
 \newlength{\figWidthB}
 
@@ -56,11 +54,9 @@
 \setlength\figWidthA{.72\textwidth}
 \setlength\figWidthB{.28\textwidth}
 
-\title[Motors and Impossible Firing Patterns in the PCFG]{Motors and Impossible
+\title{Motors and Impossible
   Firing Patterns in the\\Parallel Chip-Firing Game}
 \author{Tian-Yi Jiang, Ziv Scully, Yan X Zhang}
-\address{Massachusetts Institute of Technology}
-\email{jiangty@mit.edu, ziv@mit.edu, yanzhang@post.harvard.edu}
 \begin{abstract}
 \input{abstract}
 \end{abstract}
@@ -80,7 +76,7 @@
 
 \input{discussion}
 
-\input{bellmanFord}
+\input{bellmanFord_sidma}
 
 \section*{Acknowledgements}
 We thank the MIT PRIMES program for supporting the research that brought us
