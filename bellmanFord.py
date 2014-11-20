@@ -20,14 +20,14 @@ def bellman_ford(verts, edges):
             new_distance = e.tail.distance + e.weight
             if new_distance < e.head.distance:
                 e.head.distance = new_distance
-    # Find triangle inequality failures, which are caused by negative cycles.
-    # Also confirms we've searched the whole graph (infty < infty == False).
+    # Find triangle inequality failures caused by negative cycles.
+    # Also confirms we searched entire graph (infty < infty == False).
     for e in edges:
         if e.tail.distance + e.weight < e.head.distance:
             return True
     return False
 
-# Throughout, we use 0 instead of -1 for s_i(p), correcting for it when needed.
+# Throughout, we use 0 instead of -1 for s_i(p), correcting when needed.
 
 # Checks if mu_i(p,q) is compatible with the definition of a sector.
 def valid_vert(mu1):
