@@ -1,0 +1,4 @@
+p11, l-3: Shouldn't it be "s_X(q)m_X(q,p)" instead of "s_X(p)m_X(q,p)"?
+=> Actually fixed. (This is now page 12, line -9.)
+
+One more style correction on page 13, line 25: removed the redundant final "in" from "In one of the first papers on the parallel chip-firing game, Bitar and Goles characterized parallel chip-firing games on trees in [4]."
